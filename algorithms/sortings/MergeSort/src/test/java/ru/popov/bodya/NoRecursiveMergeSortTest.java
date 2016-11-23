@@ -6,14 +6,13 @@ import org.junit.Test;
 import java.util.Random;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-
-public class RecursiveMergeSortTest {
+public class NoRecursiveMergeSortTest {
 
     private int[] array;
-    private final static int ARRAY_SIZE = 30;
-    private final static int MAX_VALUE = 100;
+    private final static int ARRAY_SIZE = 26;
+    private final static int MAX_VALUE = 40;
 
     @Before
     public void initArray() {
@@ -26,7 +25,7 @@ public class RecursiveMergeSortTest {
 
     @Test
     public void testMergeSort() {
-        RecursiveMergeSort.mergeSort(array, 0, ARRAY_SIZE - 1);
+        NoRecursiveMergeSort.sortMergeNoRecursive(array);
         printArray();
         for (int i = 1; i < array.length; i++) {
             if (array[i] < array[i - 1]) {
@@ -40,7 +39,7 @@ public class RecursiveMergeSortTest {
     public void multiTest() {
         for (int i = 0; i < 10; i++) {
             initArray();
-            RecursiveMergeSort.mergeSort(array, 0, ARRAY_SIZE - 1);
+            NoRecursiveMergeSort.sortMergeNoRecursive(array);
             testMergeSort();
         }
     }
@@ -51,4 +50,5 @@ public class RecursiveMergeSortTest {
         }
         System.out.println();
     }
+
 }
