@@ -1,4 +1,4 @@
-package stream;
+package ru.popov.bodya.stream;
 
 import java.util.stream.Stream;
 

@@ -1,19 +1,21 @@
-package constructor;
+package ru.popov.bodya.predicate;
 
 public class User {
 
     private final String name;
+    private final int number;
 
     public User(String name, int number) {
         this.name = name;
-
+        this.number = number;
     }
+
     public String getName() {
         return name;
     }
 
-    public User(String name) {
-        this.name = name;
+    public int getNumber() {
+        return number;
     }
 
     @Override

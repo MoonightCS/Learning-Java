@@ -1,4 +1,4 @@
-package constructor;
+package ru.popov.bodya.constructor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

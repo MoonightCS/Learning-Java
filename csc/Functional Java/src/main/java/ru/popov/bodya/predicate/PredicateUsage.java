@@ -1,8 +1,4 @@
-package predicate;
-
-import comparator.*;
-import comparator.User;
-import comparator.UsersFactory;
+package ru.popov.bodya.predicate;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,6 +1,8 @@
-package comparator;
+package ru.popov.bodya.comparator;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ComparatorUsage {
 

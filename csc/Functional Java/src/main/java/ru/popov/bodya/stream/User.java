@@ -1,4 +1,4 @@
-package predicate;
+package ru.popov.bodya.stream;
 
 public class User {
 

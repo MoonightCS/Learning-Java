@@ -1,4 +1,4 @@
-package comparator;
+package ru.popov.bodya.comparator;
 
 public class User {
 

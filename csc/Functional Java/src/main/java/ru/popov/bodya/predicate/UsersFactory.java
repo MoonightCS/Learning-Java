@@ -1,4 +1,4 @@
-package comparator;
+package ru.popov.bodya.predicate;
 
 import java.util.ArrayList;
 import java.util.List;
