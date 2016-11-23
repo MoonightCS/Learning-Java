@@ -6,19 +6,20 @@ public class NoRecursiveMergeSort {
 
     public static void sortMergeNoRecursive(int[] arr) {
         int len = arr.length;
-        int n = 1;
+        int step = 1;
         int shift;
-        int two_size;
+        int secondArrSize;
 
-        while (n < len) {
+        while (step < len) {
             shift = 0;
             while (shift < len) {
-                if (shift + n >= len) break;
-                two_size = (shift + n * 2 > len) ? (len - (shift + n)) : n;
-                merge(arr, shift, shift + n, shift + n + two_size );
-                shift += n * 2;
+                if (shift + step >= len)
+                    break;
+                secondArrSize = (shift + 2 * step > len) ? (len - (shift + step)) : step;
+                merge(arr, shift, shift + step, shift + step + secondArrSize );
+                shift += step * 2;
             }
-            n *= 2;
+            step *= 2;
         }
     }
 
