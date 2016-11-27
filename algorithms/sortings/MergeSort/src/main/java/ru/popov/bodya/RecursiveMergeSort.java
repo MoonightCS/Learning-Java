@@ -1,6 +1,7 @@
 package ru.popov.bodya;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class RecursiveMergeSort {
 
@@ -8,7 +9,8 @@ public class RecursiveMergeSort {
 
         if (first < last) {
 
-            int middle = first + (last - first) / 2;
+//          int middle = first + (last - first) / 2;
+            int middle = (int)Math.random()* (last - first) + first;
 
             mergeSort(arr, first, middle);
             mergeSort(arr, middle + 1, last);
