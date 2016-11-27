@@ -9,8 +9,7 @@ public class RecursiveMergeSort {
 
         if (first < last) {
 
-//          int middle = first + (last - first) / 2;
-            int middle = (int)Math.random()* (last - first) + first;
+            int middle = first + (last - first) / 2;
 
             mergeSort(arr, first, middle);
             mergeSort(arr, middle + 1, last);

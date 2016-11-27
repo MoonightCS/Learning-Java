@@ -12,8 +12,8 @@ import static org.junit.Assert.fail;
 public class RecursiveMergeSortTest {
 
     private int[] array;
-    private final static int ARRAY_SIZE = 30;
-    private final static int MAX_VALUE = 100;
+    private final static int ARRAY_SIZE = 1_000_000;
+    private final static int MAX_VALUE = 10000;
 
     @Before
     public void initArray() {
@@ -27,7 +27,6 @@ public class RecursiveMergeSortTest {
     @Test
     public void testMergeSort() {
         RecursiveMergeSort.mergeSort(array, 0, ARRAY_SIZE - 1);
-        printArray();
         for (int i = 1; i < array.length; i++) {
             if (array[i] < array[i - 1]) {
                 fail("array is not sorted");
