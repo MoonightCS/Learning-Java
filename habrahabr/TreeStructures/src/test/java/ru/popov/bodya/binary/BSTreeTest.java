@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class BSTreeTest {
 
     private BSTree<Integer, String> bsTree;
-    
+
     @Before
     public void initTree(){
         bsTree = new BSTree<Integer, String>();
