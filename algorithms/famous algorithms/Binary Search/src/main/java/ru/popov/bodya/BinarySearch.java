@@ -35,7 +35,4 @@ public class BinarySearch {
         }
         return right;
     }
-
-
 }
-
