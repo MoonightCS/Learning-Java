@@ -24,14 +24,4 @@ public class Fibonacci {
         return recFib(n - 1) + recFib(n - 2);
     }
 
-    public static void main(String[] args) {
-
-        int n = 38;
-        Fibonacci fibonacci = new Fibonacci();
-        System.out.println(fibonacci.iterFib(n));
-        System.out.println(fibonacci.recFib(n));
-
-    }
-
-
 }

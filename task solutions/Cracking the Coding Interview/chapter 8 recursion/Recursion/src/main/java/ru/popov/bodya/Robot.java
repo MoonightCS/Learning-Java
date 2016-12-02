@@ -31,9 +31,4 @@ public class Robot {
         return a + b;
     }
 
-    public static void main(String[] args) {
-
-        Robot robot = new Robot();
-        System.out.println(robot.robotControl(4));
-    }
 }
