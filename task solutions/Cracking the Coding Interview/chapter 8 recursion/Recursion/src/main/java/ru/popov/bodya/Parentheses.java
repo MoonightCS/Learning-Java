@@ -1,5 +1,9 @@
 package ru.popov.bodya;
 
+/**
+ * Implement an algorithm to print all valid (e.g., properly opened and closed) combinations of n-pairs of parentheses.
+ */
+
 public class Parentheses {
 
     public void findParentheses(int n) {
