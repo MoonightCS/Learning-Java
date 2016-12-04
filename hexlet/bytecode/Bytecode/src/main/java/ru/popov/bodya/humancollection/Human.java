@@ -6,5 +6,4 @@ public interface Human {
 
     public String getName();
 
-
 }
