@@ -7,9 +7,13 @@ import java.util.concurrent.RecursiveTask;
 public class ParallelServiceFork {
     public static void main(String[] args) {
         int[] array = Commons.prepareArray();
+
         ForkJoinPool pool = new ForkJoinPool();
+
         long startTime = System.currentTimeMillis();
+
         double sum = pool.invoke(new RecursiveCalc(array, 0, array.length));
+
         long endTime = System.currentTimeMillis();
         System.out.println("sum = " + sum);
         System.out.println("time = " + (endTime - startTime) + "ms");
