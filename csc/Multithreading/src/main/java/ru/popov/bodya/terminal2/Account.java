@@ -12,11 +12,6 @@ public class Account {
         this(0L);
     }
 
-
-    public long getBalance() {
-        return balance;
-    }
-
     public synchronized void deposit(long amount) {
         checkAmountNonNegative(amount);
 
@@ -25,15 +20,6 @@ public class Account {
 
     }
 
-    public synchronized void withdraw(long amount) {
-        checkAmountNonNegative(amount);
-
-        if (balance < amount) {
-            throw new IllegalArgumentException("not enough money");
-        }
-        balance -= amount;
-
-    }
     public synchronized void waitAndWithdraw(long amount) throws Exception {
         checkAmountNonNegative(amount);
         while(balance < amount) {
