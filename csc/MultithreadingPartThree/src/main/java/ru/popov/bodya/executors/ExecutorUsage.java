@@ -23,6 +23,8 @@ public class ExecutorUsage {
         for (Future<String> future: futures) {
             System.out.println("Result from worker: " + future.get());
         }
+        executorService.shutdown();
+        executorService.awaitTermination(10L, TimeUnit.SECONDS);
     }
 
     private static class Worker implements Callable<String> {
