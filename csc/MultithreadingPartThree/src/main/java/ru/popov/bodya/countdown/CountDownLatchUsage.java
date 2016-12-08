@@ -1,4 +1,4 @@
-package ru.popov.bodya;
+package ru.popov.bodya.countdown;
 
 import java.util.concurrent.CountDownLatch;
 
