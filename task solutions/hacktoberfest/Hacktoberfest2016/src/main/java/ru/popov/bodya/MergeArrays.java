@@ -15,10 +15,8 @@ public class MergeArrays {
 
     public static void main(String[] args) {
 
-
         int[] arrayA = new int[SIZE_A];
         int[] arrayB = new int[SIZE_B];
-
 
         Random random = new Random();
         for (int i = 0; i < (SIZE_A - SIZE_B); i++) {
@@ -61,7 +59,6 @@ public class MergeArrays {
                 j--;
             }
         }
-
         while (j >= 0) {
             arrayA[i + j + 1] = arrayB[j];
             j--;
