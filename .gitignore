@@ -9,5 +9,6 @@
 .idea
 .DS_Store
 *.iml
+*.txt
 target/
 *.class
