@@ -1,4 +1,4 @@
-package ru.popov.bodya;
+package ru.popov.bodya.firststep;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
