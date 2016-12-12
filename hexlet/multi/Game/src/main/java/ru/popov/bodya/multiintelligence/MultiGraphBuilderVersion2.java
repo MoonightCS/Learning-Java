@@ -43,7 +43,6 @@ public class MultiGraphBuilderVersion2 {
                 throw  new RuntimeException(e);
             }
         }
-
         return new GraphNode(currentField, children);
     }
 }
