@@ -1,11 +1,7 @@
-package ru.popov.bodya.usage;
+package ru.popov.bodya.statement;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
 
 public class DBProcessor {

@@ -1,4 +1,4 @@
-package ru.popov.bodya.usage;
+package ru.popov.bodya.preparedstatement;
 
 public class Product {
 

@@ -1,4 +1,4 @@
-package ru.popov.bodya.usage;
+package ru.popov.bodya.statement;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,22 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
-public class Main {
+public class StatementUsage {
 
     private static String url;
     private static String username;
     private static String password;
+    private static DBProcessor db;
 
     public static void main(String[] args) {
-        DBProcessor db = null;
         readRootData();
-        try {
-            db = new DBProcessor();
-        } catch (SQLException e) {
-            System.out.println("SQL Exception with driver");
-        }
+        getDriver();
 
-        assert db != null;
         try (Connection connection = db.getConnection(url, username, password);
              Statement statement = connection.createStatement();) {
             String query = "select * from mydbtest.users";
@@ -52,4 +47,14 @@ public class Main {
             System.out.println("IO exception");
         }
     }
+
+
+    private static void getDriver(){
+        try {
+            db = new DBProcessor();
+        } catch (SQLException e) {
+            System.out.println("SQL Exception with driver");
+        }
+    }
+
 }
