@@ -44,8 +44,6 @@ public class PreparedStatementUsage {
             System.out.println("IO exception");
         }
     }
-
-
     private static void getDriver(){
         try {
             db = new DBProcessor();
