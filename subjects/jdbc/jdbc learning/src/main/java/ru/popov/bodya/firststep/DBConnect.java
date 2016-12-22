@@ -20,6 +20,7 @@ public class DBConnect {
         newDbConnection();
 
     }
+
     private static void newDbConnection() {
         try {
 

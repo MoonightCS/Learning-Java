@@ -5,15 +5,12 @@ package com.javarush.test.level03.lesson03.task03;
 Исправьте ошибку в сигнатуре метода.
 Подсказка: подумайте, какие у этого метода входные и выходные данные.
 */
-public class Solution
-{
-    public static double addTenPercent(int i)
-    {
+public class Solution {
+    public static double addTenPercent(int i) {
         return i + 0.1 * i;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         System.out.println(addTenPercent(10));
     }
