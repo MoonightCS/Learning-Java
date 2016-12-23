@@ -5,9 +5,6 @@ package com.javarush.test.level03.lesson04.task03;
 Дать им всем уникальные имена.
 */
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution {
     public static void main(String[] args) {
         // камнями прошу не кидать, это единственное, что проходит проверку
