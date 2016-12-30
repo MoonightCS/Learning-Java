@@ -18,7 +18,7 @@ public class Solution {
         final int a = Integer.parseInt(reader.readLine().trim());
         final int b = Integer.parseInt(reader.readLine().trim());
         final int c = Integer.parseInt(reader.readLine().trim());
-        List<Integer> list = new ArrayList<>(Arrays.asList(a,b,c));
+        List<Integer> list = new ArrayList<>(Arrays.asList(a, b, c));
         Collections.sort(list);
         Collections.reverse(list);
         for (int i : list) {

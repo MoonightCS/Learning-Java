@@ -10,7 +10,7 @@ package com.javarush.test.level04.lesson04.task04;
 
 public class Solution {
 
-    private static String[] SEASONS = new String[]{"зима","весна","лето","осень", "зима"};
+    private static String[] SEASONS = new String[]{"зима", "весна", "лето", "осень", "зима"};
 
     public static void main(String[] args) {
         checkSeason(12);
