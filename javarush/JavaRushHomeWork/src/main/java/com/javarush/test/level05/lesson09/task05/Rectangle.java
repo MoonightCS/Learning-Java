@@ -24,11 +24,11 @@ public class Rectangle {
     }
 
     public Rectangle(int left, int top) {
-        this(left,top,0,0);
+        this(left, top, 0, 0);
     }
 
     public Rectangle(int left, int top, int width) {
-        this(left,top,width,width);
+        this(left, top, width, width);
     }
 
     public Rectangle(Rectangle rectangle) {

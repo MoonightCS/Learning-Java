@@ -37,6 +37,7 @@ public class Cat {
         this.weight = AVERAGE_WEIGHT;
         this.age = age;
     }
+
     public void initialize(int weight, String color) {
         this.weight = weight;
         this.color = color;

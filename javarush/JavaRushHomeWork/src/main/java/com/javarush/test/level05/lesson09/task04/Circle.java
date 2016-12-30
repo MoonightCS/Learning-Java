@@ -26,7 +26,7 @@ public class Circle {
     }
 
     public Circle(int centerX, int centerY, int radius, int width, String color) {
-        this(centerX,centerY,radius,width);
+        this(centerX, centerY, radius, width);
         this.color = color;
     }
 }
