@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int number1 = Integer.parseInt(reader.readLine().trim());
         int number2 = Integer.parseInt(reader.readLine().trim());
         int number3 = Integer.parseInt(reader.readLine().trim());

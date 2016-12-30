@@ -8,10 +8,10 @@ import java.io.*;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int command;
         int count = 0;
-        while((command = Integer.parseInt(reader.readLine().trim())) != -1) {
+        while ((command = Integer.parseInt(reader.readLine().trim())) != -1) {
             count += command;
         }
         System.out.println(count - 1);
