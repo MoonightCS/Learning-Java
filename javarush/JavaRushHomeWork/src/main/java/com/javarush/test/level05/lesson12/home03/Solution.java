@@ -26,28 +26,28 @@ public class Solution {
         }
     }
 
-   private static class Dog {
-       String name;
-       int height;
-       int tail;
+    private static class Dog {
+        String name;
+        int height;
+        int tail;
 
-       public Dog(String name, int height, int tail) {
-           this.name = name;
-           this.height = height;
-           this.tail = tail;
-       }
-   }
+        public Dog(String name, int height, int tail) {
+            this.name = name;
+            this.height = height;
+            this.tail = tail;
+        }
+    }
 
-   private static class Cat {
-       String name;
-       int height;
-       int tail;
+    private static class Cat {
+        String name;
+        int height;
+        int tail;
 
-       public Cat(String name, int height, int tail) {
-           this.name = name;
-           this.height = height;
-           this.tail = tail;
-       }
-   }
+        public Cat(String name, int height, int tail) {
+            this.name = name;
+            this.height = height;
+            this.tail = tail;
+        }
+    }
 
 }
