@@ -7,12 +7,17 @@ package com.javarush.test.level06.lesson11.home05;
 на экран описание идеи - это то, что возвращает метод getDescription
 */
 
-public class Solution
-{
-    public static void main(String[] args)
-    {
+public class Solution {
+    public static void main(String[] args) {
         printIdea(new Idea());
     }
+    public static void printIdea(Idea idea) {
+        System.out.println(idea.getDescription());
+    }
 
-    //Добавьте тут класс Idea
+    public static class Idea {
+        public  String getDescription(){
+            return "My Cool idea!";
+        }
+    }
 }
