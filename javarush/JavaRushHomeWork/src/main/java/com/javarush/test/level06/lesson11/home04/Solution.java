@@ -19,11 +19,11 @@ public class Solution {
         new Solution().method3();
     }
 
-    public  void method3() {
+    public void method3() {
         method4();
     }
 
-    public  void method4() {
+    public void method4() {
         step++;
         for (StackTraceElement element : Thread.currentThread().getStackTrace())
             System.out.println(element);

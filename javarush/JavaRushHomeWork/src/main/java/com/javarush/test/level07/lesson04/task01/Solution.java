@@ -14,14 +14,13 @@ import java.util.Collections;
 2. Метод max(int[] array) должен находить максимальное число из элементов массива
 */
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
+public class Solution {
+    public static void main(String[] args) throws Exception {
         int[] array = initializeArray();
         int max = max(array);
         System.out.println(max);
     }
+
     public static int[] initializeArray() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int[] arr = new int[20];
