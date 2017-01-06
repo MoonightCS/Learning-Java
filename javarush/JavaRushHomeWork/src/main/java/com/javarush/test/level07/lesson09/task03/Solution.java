@@ -18,7 +18,7 @@ public class Solution {
         List<String> list = new ArrayList<>(Arrays.asList("мама", "мыла", "раму"));
         int size = list.size();
         for (int i = 0; i < 2 * size; i += 2) {
-            list.add(i + 1,"именно");
+            list.add(i + 1, "именно");
         }
         for (String s : list) {
             System.out.println(s);

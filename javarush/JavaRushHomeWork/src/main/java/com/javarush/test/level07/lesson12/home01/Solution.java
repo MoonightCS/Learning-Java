@@ -15,7 +15,12 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        //напишите тут ваш код
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            numbers.add(Integer.parseInt(reader.readLine().trim()));
+        }
+        for (int i = numbers.size() - 1; i >= 0; i--) {
+            System.out.println(numbers.get(i));
+        }
     }
 }
