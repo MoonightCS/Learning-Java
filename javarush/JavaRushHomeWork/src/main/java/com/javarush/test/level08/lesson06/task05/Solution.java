@@ -1,5 +1,7 @@
 package com.javarush.test.level08.lesson06.task05;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,22 +13,20 @@ import java.util.List;
 
 public class Solution {
     public static List getListForGet() {
-        //напишите тут ваш код
-
+        return new ArrayList();
     }
 
     public static List getListForSet() {
-        //напишите тут ваш код
+        return new ArrayList();
 
     }
 
     public static List getListForAddOrInsert() {
-        //напишите тут ваш код
+        return new LinkedList();
 
     }
 
     public static List getListForRemove() {
-        //напишите тут ваш код
-
+        return new LinkedList();
     }
 }

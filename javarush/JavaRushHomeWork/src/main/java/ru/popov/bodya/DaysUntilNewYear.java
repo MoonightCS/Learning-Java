@@ -1,4 +1,4 @@
-package ru.popov.bodya.date;
+package ru.popov.bodya;
 
 import java.util.Calendar;
 import java.util.Date;
