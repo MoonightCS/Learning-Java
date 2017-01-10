@@ -39,10 +39,7 @@ public class Solution {
 
     public static void removeItemFromMapByValue(HashMap<String, String> map, String value) {
         HashMap<String, String> copy = new HashMap<String, String>(map);
-        for (Map.Entry<String, String> pair : copy.entrySet()) {
-            if (pair.getValue().equals(value))
-                map.remove(pair.getKey());
-        }
+        copy.entrySet().stream().filter(pair -> pair.getValue().equals(value)).forEach(pair -> map.remove(pair.getKey()));
     }
 
     public static void main(String[] args) {
