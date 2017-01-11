@@ -14,8 +14,6 @@ public class DaysUntilNewYear {
         cal.set(Calendar.MONTH, 0);
 
         Date date = cal.getTime();
-
-
         Date currentTime = new Date();
 
         long msTimeDistance = currentTime.getTime() - date.getTime();
