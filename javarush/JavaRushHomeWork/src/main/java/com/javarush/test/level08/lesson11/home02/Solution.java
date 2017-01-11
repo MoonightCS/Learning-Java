@@ -54,7 +54,7 @@ public class Solution {
     }
 
     public static void printPets(Set<Object> pets) {
-        for (Object pet: pets) {
+        for (Object pet : pets) {
             System.out.println(pet);
         }
     }

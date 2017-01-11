@@ -33,6 +33,7 @@ public class Solution {
             }
         }
     }
+
     private static void swap(int[] arr, int a, int b) {
         int tmp = arr[a];
         arr[a] = arr[b];

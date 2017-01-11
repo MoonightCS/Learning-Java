@@ -19,7 +19,7 @@ public class DaysUntilNewYear {
         long msTimeDistance = currentTime.getTime() - date.getTime();
         long msDay = 24 * 60 * 60 * 1000;  //сколько миллисекунд в одних сутках
 
-        int dayCount = (int) (msTimeDistance/msDay); //количество целых дней
+        int dayCount = (int) (msTimeDistance / msDay); //количество целых дней
         System.out.println("Days from start of year: " + dayCount);
     }
 }

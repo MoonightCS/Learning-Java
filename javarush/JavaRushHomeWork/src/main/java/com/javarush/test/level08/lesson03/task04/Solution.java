@@ -26,7 +26,7 @@ public class Solution {
     }
 
     public static void printKeys(Map<String, String> map) {
-        Iterator<Map.Entry<String,String>> iterator = map.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next().getKey());
         }

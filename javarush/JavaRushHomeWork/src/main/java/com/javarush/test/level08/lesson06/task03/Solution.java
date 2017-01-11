@@ -20,7 +20,7 @@ public class Solution {
         Date before = new Date();
         insert10000(list);
         Date after = new Date();
-        return  after.getTime() - before.getTime();
+        return after.getTime() - before.getTime();
 
     }
 

@@ -34,7 +34,7 @@ public class Solution {
     }
 
     public static void printCats(Set<Cat> cats) {
-        for (Cat cat: cats) {
+        for (Cat cat : cats) {
             System.out.println(cat);
         }
     }

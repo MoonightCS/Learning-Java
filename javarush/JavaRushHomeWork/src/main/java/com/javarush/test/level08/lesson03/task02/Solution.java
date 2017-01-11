@@ -27,7 +27,7 @@ public class Solution {
         fruits.put("ирис", "цветок");
         fruits.put("картофель", "клубень");
 
-        Iterator<Map.Entry<String,String>> mapIterator = fruits.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> mapIterator = fruits.entrySet().iterator();
         while (mapIterator.hasNext()) {
             Map.Entry<String, String> pair = mapIterator.next();
             System.out.println(pair.getKey() + " - " + pair.getValue());

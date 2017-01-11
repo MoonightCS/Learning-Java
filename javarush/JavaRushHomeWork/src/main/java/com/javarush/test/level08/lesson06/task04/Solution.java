@@ -27,7 +27,7 @@ public class Solution {
         Date before = new Date();
         get10000(list);
         Date after = new Date();
-        return  after.getTime() - before.getTime();
+        return after.getTime() - before.getTime();
     }
 
     public static void get10000(List list) {

@@ -41,7 +41,7 @@ public class Solution {
 
     public static void set10000(List list) {
         for (int i = 0; i < 10000; i++) {
-            list.set(i,new Object());
+            list.set(i, new Object());
         }
 
     }
