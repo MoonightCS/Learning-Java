@@ -29,7 +29,7 @@ public class Solution {
 
     public static Set<Cat> convertMapToSet(Map<String, Cat> map) {
         Set<Cat> cats = new HashSet<>();
-        for (Cat cat: map.values()) {
+        for (Cat cat : map.values()) {
             cats.add(cat);
         }
         return cats;

@@ -7,7 +7,10 @@ package com.javarush.test.level08.lesson03.task01;
 Посмотреть, как изменился порядок добавленных элементов.
 */
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) throws Exception {

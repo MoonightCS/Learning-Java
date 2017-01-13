@@ -11,19 +11,19 @@ public class SimpleDateFormatExample {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat();
 
-        System.out.println("Constructor 1: " + dateFormat.format( currentDate ) );
+        System.out.println("Constructor 1: " + dateFormat.format(currentDate));
 
         dateFormat = new SimpleDateFormat("dd MMMM");
-        System.out.println("Constructor 2: " + dateFormat.format( currentDate ) );
+        System.out.println("Constructor 2: " + dateFormat.format(currentDate));
 
-        dateFormat = new SimpleDateFormat("dd MMMM", myDateFormatSymbols );
-        System.out.println("Constructor 3: " + dateFormat.format( currentDate ) );
+        dateFormat = new SimpleDateFormat("dd MMMM", myDateFormatSymbols);
+        System.out.println("Constructor 3: " + dateFormat.format(currentDate));
 
         dateFormat = new SimpleDateFormat("dd MMMM", Locale.ENGLISH);
-        System.out.println("Constructor 4: " + dateFormat.format( currentDate ) );
+        System.out.println("Constructor 4: " + dateFormat.format(currentDate));
     }
 
-    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols() {
 
         @Override
         public String[] getMonths() {

@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class ParseDate {
     public static void main(String[] args) throws IOException, ParseException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in) );
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String sName1 = reader.readLine();
         SimpleDateFormat sf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
         SimpleDateFormat sf1 = new SimpleDateFormat("MM/dd/yyyy");

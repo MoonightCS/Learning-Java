@@ -1,7 +1,6 @@
 package com.javarush.test.level08.lesson08.task03;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /* Одинаковые имя и фамилия

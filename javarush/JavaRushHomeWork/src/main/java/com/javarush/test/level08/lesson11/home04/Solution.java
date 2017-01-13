@@ -3,7 +3,9 @@ package com.javarush.test.level08.lesson11.home04;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /* Минимальное из N чисел
 1. Ввести с клавиатуры число N.

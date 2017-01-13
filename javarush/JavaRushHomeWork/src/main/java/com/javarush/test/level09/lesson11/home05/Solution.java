@@ -14,7 +14,6 @@ package com.javarush.test.level09.lesson11.home05;
 М м м л р м .
 */
 
-<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -46,28 +45,11 @@ public class Solution {
         c = Character.toLowerCase(c);
 
         for (char d : vowels) {
-=======
-public class Solution {
-    public static void main(String[] args) throws Exception {
-        //напишите тут ваш код
-    }
-
-
-    public static char[] vowels = new char[]{'а', 'я', 'у', 'ю', 'и', 'ы', 'э', 'е', 'о', 'ё'};
-
-    //метод проверяет, гласная ли буква
-    public static boolean isVowel(char c) {
-        c = Character.toLowerCase(c);  //приводим символ в нижний регистр - от заглавных к строчным буквам
-
-        for (char d : vowels)   //ищем среди массива гласных
-        {
->>>>>>> 687e2eaf7ea702bcf4bf1044a8f8c9ff46a75d59
             if (c == d)
                 return true;
         }
         return false;
     }
-<<<<<<< HEAD
 
     private static void printArray(char[] array, int size) {
         for (int k = 0; k < size; k++) {
@@ -75,6 +57,4 @@ public class Solution {
         }
         System.out.println();
     }
-=======
->>>>>>> 687e2eaf7ea702bcf4bf1044a8f8c9ff46a75d59
 }

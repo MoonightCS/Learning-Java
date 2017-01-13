@@ -3,9 +3,6 @@ package com.javarush.test.level07.lesson04.task01;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 /* Максимальное среди массива на 20 чисел
 1. В методе initializeArray():

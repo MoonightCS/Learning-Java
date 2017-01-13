@@ -3,7 +3,6 @@ package com.javarush.test.level07.lesson09.task05;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 /* Удвой слова
 1. Введи с клавиатуры 10 слов в список строк.

@@ -3,9 +3,7 @@ package com.javarush.test.level08.lesson11.bonus02;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /* Нужно добавить в программу новую функциональность

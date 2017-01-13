@@ -2,7 +2,6 @@ package com.javarush.test.level09.lesson08.task01;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
 /* Исключения
 Есть метод, который выбрасывает два исключения, унаследованные от Exception, и два унаследованных от RuntimeException:

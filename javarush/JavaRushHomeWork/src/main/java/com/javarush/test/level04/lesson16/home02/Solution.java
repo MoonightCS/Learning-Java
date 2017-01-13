@@ -1,7 +1,7 @@
 package com.javarush.test.level04.lesson16.home02;
 
-import java.io.*;
-import java.util.TreeMap;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.TreeSet;
 
 /* Среднее такое среднее

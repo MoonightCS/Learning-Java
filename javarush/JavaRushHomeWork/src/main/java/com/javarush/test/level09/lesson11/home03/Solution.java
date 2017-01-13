@@ -8,7 +8,6 @@ package com.javarush.test.level09.lesson11.home03;
 */
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         List<Integer> numbers = new ArrayList<>();
         try {
-            while (true){
+            while (true) {
                 numbers.add(Integer.parseInt(reader.readLine().trim()));
             }
         } catch (Exception nfe) {

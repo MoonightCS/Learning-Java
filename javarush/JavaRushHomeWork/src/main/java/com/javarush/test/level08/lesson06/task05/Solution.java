@@ -1,7 +1,5 @@
 package com.javarush.test.level08.lesson06.task05;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

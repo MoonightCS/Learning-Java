@@ -3,7 +3,6 @@ package com.javarush.test.level07.lesson06.task02;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /* Самая длинная строка
