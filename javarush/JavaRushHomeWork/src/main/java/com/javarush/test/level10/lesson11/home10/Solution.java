@@ -19,7 +19,6 @@ public class Solution {
             int x = Integer.parseInt(reader.readLine());
             list.add(x);
         }
-
         System.out.println(safeGetElement(list, 5, 1));
         System.out.println(safeGetElement(list, 20, 7));
         System.out.println(safeGetElement(list, -5, 9));
