@@ -9,15 +9,11 @@ ProjectManager(менеджер проекта), CTO(технический ди
 */
 
 public class Solution {
-    public static void main(String[] args) {
-    }
 
     public class Worker {
-
     }
 
     public class Clerk extends Worker {
-
     }
 
     public class IT extends Worker {
