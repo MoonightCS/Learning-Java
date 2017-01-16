@@ -11,7 +11,8 @@ public class CounterOfJavaFiles {
 
     public static void main(String[] args) throws IOException {
 
-        Path dir = Paths.get("/Users/user/Desktop/learning-java/javarush/JavaRushHomeWork/src/main/java/com/javarush/test");
+        // Path dir = Paths.get("/Users/user/Desktop/learning-java/javarush/JavaRushHomeWork/src/main/java/com/javarush/test"); macbook
+        Path dir = Paths.get("/Users/bogdanpopov/Desktop/learning-java/javarush/JavaRushHomeWork/src/main/java/com/javarush/test");
         try (Stream<Path> files = Files.walk(dir)) {
             long count = files.filter((path -> path.toString().endsWith("Solution.java")))
                     .peek((System.out::println))
