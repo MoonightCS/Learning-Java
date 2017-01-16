@@ -33,7 +33,7 @@ public class Solution {
     public static Map<String, Integer> countWords(ArrayList<String> list) {
         HashMap<String, Integer> result = new HashMap<>();
 
-        for (String s: list) {
+        for (String s : list) {
             if (result.get(s) != null) {
                 result.put(s, result.get(s) + 1);
             } else {

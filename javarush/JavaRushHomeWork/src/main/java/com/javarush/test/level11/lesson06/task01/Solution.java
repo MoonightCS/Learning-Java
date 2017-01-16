@@ -13,7 +13,7 @@ public class Solution {
 
     }
 
-    public class Pegas extends Horse{
+    public class Pegas extends Horse {
 
     }
 }

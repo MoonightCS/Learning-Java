@@ -41,7 +41,7 @@ public class Solution {
             map.put(name, id);
         }
 
-        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getValue() + " " + entry.getKey());
         }
 
