@@ -51,14 +51,14 @@ public class Solution {
         }
     }
 
-    public class Car implements Move{
+    public class Car implements Move {
         @Override
         public void move() {
 
         }
     }
 
-    public class Airplane implements Fly, Move{
+    public class Airplane implements Fly, Move {
         @Override
         public void fly() {
 

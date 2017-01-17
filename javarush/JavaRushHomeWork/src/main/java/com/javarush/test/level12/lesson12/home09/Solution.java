@@ -12,8 +12,8 @@ public class Solution {
         System.out.println(cto);
     }
 
-    public  interface Businessman {
-         void workHard();
+    public interface Businessman {
+        void workHard();
     }
 
     public static class HardworkingMan {
@@ -23,7 +23,7 @@ public class Solution {
         }
     }
 
-    public static class CTO extends HardworkingMan implements Businessman{
+    public static class CTO extends HardworkingMan implements Businessman {
 
     }
 

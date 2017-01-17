@@ -12,6 +12,7 @@ public class Solution {
     public void print(int a) {
         System.out.println(a);
     }
+
     public void print(String s) {
         System.out.println(s);
     }

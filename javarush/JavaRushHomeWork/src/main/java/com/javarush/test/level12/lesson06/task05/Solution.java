@@ -16,7 +16,7 @@ public class Solution {
         public abstract Pet getChild();
     }
 
-    public static class Cat extends Pet{
+    public static class Cat extends Pet {
 
         @Override
         public String getName() {
@@ -29,7 +29,7 @@ public class Solution {
         }
     }
 
-    public static class Dog extends Pet{
+    public static class Dog extends Pet {
 
         @Override
         public String getName() {

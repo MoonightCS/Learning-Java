@@ -11,6 +11,7 @@ public class Solution {
 
     public interface Fly {
         void fly();
+
         void fly(int speed);
     }
 }

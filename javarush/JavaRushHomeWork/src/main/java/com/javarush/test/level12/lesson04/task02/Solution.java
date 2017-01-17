@@ -6,8 +6,7 @@ package com.javarush.test.level12.lesson04.task02;
 */
 
 public class Solution {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         int n = 5;
         Integer N = 4;
         print(n);
@@ -17,11 +16,11 @@ public class Solution {
     //Напишите тут ваши методы
 
 
-    public static void print(int n){
+    public static void print(int n) {
         System.out.println(n);
     }
 
-    public static void print(Integer n){
+    public static void print(Integer n) {
         System.out.println(n);
     }
 }

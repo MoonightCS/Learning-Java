@@ -10,12 +10,14 @@ public class Solution {
 
     }
 
-    public static int min (int a, int b) {
+    public static int min(int a, int b) {
         return Integer.min(a, b);
     }
+
     public static long min(long a, long b) {
         return Long.min(a, b);
     }
+
     public static double min(double a, double b) {
         return Double.min(a, b);
     }

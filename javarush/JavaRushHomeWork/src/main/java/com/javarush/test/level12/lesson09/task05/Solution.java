@@ -15,9 +15,11 @@ public class Solution {
     public interface Run {
         void run();
     }
+
     public interface Swim {
         void swim();
     }
+
     public abstract class Human implements Run, Swim {
 
     }
