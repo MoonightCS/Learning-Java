@@ -21,7 +21,8 @@ public class Solution {
             return "Я переводчик с " + getLanguage();
         }
     }
-    private static class EnglishTranslator extends Translator{
+
+    private static class EnglishTranslator extends Translator {
 
         @Override
         public String getLanguage() {

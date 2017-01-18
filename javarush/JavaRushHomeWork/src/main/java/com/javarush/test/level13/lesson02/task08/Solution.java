@@ -11,9 +11,11 @@ package com.javarush.test.level13.lesson02.task08;
 public class Solution {
     public static void main(String[] args) throws Exception {
     }
+
     private interface Person {
         boolean isAlive();
     }
+
     private interface Presidentable extends Person {
 
     }

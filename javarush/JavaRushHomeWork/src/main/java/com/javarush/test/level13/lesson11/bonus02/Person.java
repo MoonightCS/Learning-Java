@@ -12,6 +12,7 @@ public class Person implements RepkaItem {
     public void pull(Person person) {
         System.out.printf("%s за %s\n", this.name, person.getNamePadezh());
     }
+
     @Override
     public String getNamePadezh() {
         return namePadezh;

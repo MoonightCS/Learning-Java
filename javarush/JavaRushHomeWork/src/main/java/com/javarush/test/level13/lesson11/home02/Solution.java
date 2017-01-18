@@ -13,7 +13,7 @@ public class Solution {
         System.out.println(new Today(WeatherType.FROZEN));
     }
 
-    static class Today implements Weather{
+    static class Today implements Weather {
         private String type;
 
         Today(String type) {

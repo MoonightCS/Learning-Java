@@ -18,7 +18,7 @@ public class Solution {
         Integer getAge();
     }
 
-    public static abstract class Fox implements Animal{
+    public static abstract class Fox implements Animal {
         public String getName() {
             return "Fox";
         }

@@ -15,7 +15,7 @@ public class Solution {
     interface Desire {
     }
 
-    interface Dream  {
+    interface Dream {
         static Hobbie HOBBIE = new Hobbie();
     }
 

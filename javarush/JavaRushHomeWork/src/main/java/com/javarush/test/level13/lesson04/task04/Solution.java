@@ -28,7 +28,7 @@ public class Solution {
     }
 
     //add your code below
-    public static class BigFox extends Fox{
+    public static class BigFox extends Fox {
         @Override
         public Color getColor() {
             return Color.GRAY;

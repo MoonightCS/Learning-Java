@@ -21,7 +21,7 @@ public class Solution {
         DBObject initializeIdAndName(long id, String name);
     }
 
-    static class User implements DBObject{
+    static class User implements DBObject {
         long id;
         String name;
 

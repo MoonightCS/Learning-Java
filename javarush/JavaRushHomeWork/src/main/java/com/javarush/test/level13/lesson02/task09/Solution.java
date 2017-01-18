@@ -11,9 +11,11 @@ package com.javarush.test.level13.lesson02.task09;
 public class Solution {
     public static void main(String[] args) throws Exception {
     }
+
     private interface Movable {
         Double speed();
     }
+
     private interface Runable extends Movable {
         Double speed(Runable runable);
     }
