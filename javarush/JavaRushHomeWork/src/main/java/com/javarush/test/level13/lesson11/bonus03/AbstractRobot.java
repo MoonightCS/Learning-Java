@@ -1,10 +1,10 @@
 package com.javarush.test.level13.lesson11.bonus03;
 
-public abstract class AbstractRobot {
+public abstract class AbstractRobot implements Attackable, Defensable {
 
     private static int hitCount;
 
-
+    @Override
     public BodyPart attack() {
         BodyPart attackedBodyPart = null;
         hitCount = hitCount + 1;
@@ -22,6 +22,7 @@ public abstract class AbstractRobot {
         return attackedBodyPart;
     }
 
+    @Override
     public BodyPart defense() {
         BodyPart defencedBodyPart = null;
         hitCount = hitCount + 1;
