@@ -33,7 +33,7 @@ public class Solution {
         void onSelect();
     }
 
-    static class Food implements Selectable{
+    static class Food implements Selectable {
         public void eat() {
             System.out.println("food is eaten");
         }

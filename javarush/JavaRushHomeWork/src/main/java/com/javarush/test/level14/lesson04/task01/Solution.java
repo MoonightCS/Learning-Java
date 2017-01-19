@@ -23,7 +23,7 @@ public class Solution {
         return new Building();
     }
 
-    static class School extends Building{
+    static class School extends Building {
         @Override
         public String toString() {
             return "School";
