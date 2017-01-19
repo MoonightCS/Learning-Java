@@ -1,4 +1,4 @@
-package ru.popov.bodya;
+package ru.popov.bodya.readers;
 
 import java.io.*;
 
