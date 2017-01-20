@@ -1,5 +1,8 @@
 package com.javarush.test.level15.lesson12.home07;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +13,24 @@ import java.util.List;
 */
 
 public class Solution {
-    public static List<String> lines = new ArrayList<String>();
+    public static List<String> lines = new ArrayList<>();
+
+    static {
+        try {
+            FileReader fileReader = new FileReader(Constants.FILE_NAME);
+            BufferedReader finalReader = new BufferedReader(fileReader);
+            String tmp;
+            while ((tmp = finalReader.readLine()) != null) {
+                lines.add(tmp);
+            }
+            fileReader.close();
+            finalReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static void main(String[] args) {
         System.out.println(lines);
