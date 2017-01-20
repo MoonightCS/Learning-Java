@@ -1,16 +1,21 @@
 package ru.popov.bodya;
 
 public class Main {
-    public static void main(String[] args) {
-        int a = 0;
-        int b = a + 46;
-        byte c = (byte) (a * b);
-        double f = (char) 1234.15;
-        char ch = (char) 1234.15;
+    public int a = 5;
 
-        System.out.println((char) 1234.15);
-        long d = (long) (a + f / c + b);
-        System.out.println(d);
+    public int b = getSum();
+
+    public int c = getSum() - a - b;
+
+    public int getSum() {
+        return a + b + c;
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        System.out.println(main.a);
+        System.out.println(main.b);
+        System.out.println(main.c);
     }
 
 }
