@@ -29,7 +29,7 @@ public class Solution {
     public static class OnlineGame extends Thread {
         public static volatile boolean isWinnerFound = false;
 
-        public static List<String> steps = new ArrayList<String>();
+        public static List<String> steps = new ArrayList<>();
 
         static {
             steps.add("Начало игры");
@@ -42,6 +42,7 @@ public class Solution {
         protected Gamer gamer2 = new Gamer("Petrov", 1);
         protected Gamer gamer3 = new Gamer("Sidorov", 5);
 
+        @Override
         public void run() {
             gamer1.start();
             gamer2.start();
@@ -65,7 +66,33 @@ public class Solution {
 
         @Override
         public void run() {
-            //Add your code here - добавь код тут
+            try {
+                while (!OnlineGame.isWinnerFound) {
+                    int countOfSteps = 0;
+                    int endCount = OnlineGame.steps.size();
+
+                    for (; countOfSteps < endCount; countOfSteps++) {
+                        System.out.println(getName() + ":" + OnlineGame.steps.get(countOfSteps));
+                        Thread.sleep(1000 / rating);
+                    }
+
+                    if (countOfSteps == endCount) {
+                        System.out.println(getName() + ":победитель!");
+                        OnlineGame.isWinnerFound = true;
+                    }
+
+                }
+            } catch (InterruptedException e) {
+                System.out.println(getName() + ":проиграл");
+            }
         }
     }
 }
+
+/*
+2. Реализуйте логику метода run так, чтобы для каждого игрока:
+2.1. За 1 секунду через равные интервалы времени выводились в консоль действия, описанные в steps. Количество выведенных действий должно равняться rating.
+2.2. Любой текст должен начинаться с фамилии игрока (метод getName()), потом следовать двоеточие, а затем сам текст. Пример: [Ivanov:Начало игры].
+2.3. Когда игрок выполнит все действия из steps, то он считается победителем. Выведите [getName() + ":победитель!"].
+2.4. Когда найден победитель, то игра останавливается, и остальные игроки считаются побежденными. Выведите для них [getName() + ":проиграл"].
+*/
