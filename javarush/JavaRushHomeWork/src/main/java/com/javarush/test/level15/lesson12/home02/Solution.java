@@ -37,11 +37,11 @@ public class Solution {
         }
     }
 
-    public  interface Flyable {
+    public interface Flyable {
         void doAction();
     }
 
-     interface Movable  {
+    interface Movable {
         void doAction(Movable movable);
     }
 }

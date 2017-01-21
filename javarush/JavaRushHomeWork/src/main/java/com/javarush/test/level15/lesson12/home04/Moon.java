@@ -5,6 +5,7 @@ public class Moon implements Planet {
 
     private Moon() {
     }
+
     public static Moon getInstance() {
         if (instance == null) {
             instance = new Moon();

@@ -22,13 +22,13 @@ public class Solution {
     }
 
     public static class LuxuriousCar {
-        protected void printlnDesire(){
+        protected void printlnDesire() {
             System.out.println(Constants.WANT_STRING + Constants.LUXURIOUS_CAR);
         }
     }
 
     public static class CheapCar {
-         void printlnDesire(){
+        void printlnDesire() {
             System.out.println(Constants.WANT_STRING + Constants.CHEAP_CAR);
         }
     }

@@ -12,7 +12,7 @@ package com.javarush.test.level15.lesson12.bonus01;
 5. Закрыть поток ввода методом close().
 */
 
-public class Helicopter implements Flyable{
+public class Helicopter implements Flyable {
 
     @Override
     public void fly() {

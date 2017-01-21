@@ -20,7 +20,7 @@ public class Solution {
     public static int A = 0;
 
     static {
-        A = 5/0;
+        A = 5 / 0;
     }
 
     public static int B = 5;

@@ -18,7 +18,7 @@ package com.javarush.test.level15.lesson12.bonus02;
 "Делаем кофе"
 */
 
-public class TeaMaker extends DrinkMaker{
+public class TeaMaker extends DrinkMaker {
 
     @Override
     void getRightCup() {

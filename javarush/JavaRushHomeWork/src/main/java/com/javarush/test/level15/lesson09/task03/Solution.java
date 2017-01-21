@@ -23,6 +23,7 @@ public class Solution {
         System.out.println(StringVar);
 
     }
+
     static int intVar;
     static double doubleVar;
     static Double DoubleVar;

@@ -18,7 +18,7 @@ public class Solution {
         Object getAllowedAction();
     }
 
-    public static class Clothes implements Discountable, Sellable{
+    public static class Clothes implements Discountable, Sellable {
         @Override
         public Object getAllowedAction(String name) {
             return this;
