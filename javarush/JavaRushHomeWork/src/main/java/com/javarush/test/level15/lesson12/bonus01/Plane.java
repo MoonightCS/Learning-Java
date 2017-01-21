@@ -1,8 +1,6 @@
 package com.javarush.test.level15.lesson12.bonus01;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 
 /* Осваивание статического блока
 1. В отдельных файлах создать классы Plane и Helicopter, реализующие интерфейс Flyable.
@@ -15,29 +13,16 @@ import java.io.InputStreamReader;
 5. Закрыть поток ввода методом close().
 */
 
-public class Solution {
-    static {
-        try {
-            reset();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+public class Plane implements Flyable{
+    private int passangersNumer;
+
+
+    public Plane(int passangersNumer) {
+        this.passangersNumer = passangersNumer;
     }
 
-    public static Flyable result;
+    @Override
+    public void fly() {
 
-    public static void reset() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String string = reader.readLine();
-        if (string.equals("plane") || string.equals("helicopter")) {
-            if (string.equals("helicopter")) {
-                result = new Helicopter();
-            } else {
-                int countOfPassengers = Integer.parseInt(reader.readLine());
-                result = new Plane(countOfPassengers);
-            }
-        }
-        reader.close();
     }
-
 }
