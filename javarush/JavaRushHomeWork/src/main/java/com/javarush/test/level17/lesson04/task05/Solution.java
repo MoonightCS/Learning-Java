@@ -16,7 +16,7 @@ public class Solution {
             synchronized (Solution.class) {
                 if (imf == null) {
                     imf = new IMF();
-                } 
+                }
             }
             return imf;
         }
