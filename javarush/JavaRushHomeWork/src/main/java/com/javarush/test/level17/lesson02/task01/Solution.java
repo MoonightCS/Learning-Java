@@ -35,6 +35,7 @@ public class Solution {
             }
         }
     }
+
     public static class NoteThread extends Thread {
         @Override
         public void run() {
