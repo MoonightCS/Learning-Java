@@ -22,6 +22,7 @@ public class Solution {
                 printMsg();
             }
         }
+
         public void printMsg() {
             Thread t = Thread.currentThread();
             String name = t.getName();

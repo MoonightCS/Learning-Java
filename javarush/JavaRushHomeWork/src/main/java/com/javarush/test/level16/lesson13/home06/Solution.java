@@ -14,9 +14,10 @@ public class Solution {
     }
 
     //Add your code below - добавьте код ниже
-    public static class CountUpRunnable implements Runnable{
+    public static class CountUpRunnable implements Runnable {
         private int countIndexUp = 1;
         private Thread t;
+
         public CountUpRunnable(String name) {
             t = new Thread(this, name);
             t.start();
@@ -34,6 +35,7 @@ public class Solution {
             } catch (InterruptedException e) {
             }
         }
+
         public String toString() {
             return t.getName() + ": " + countIndexUp;
         }

@@ -28,7 +28,7 @@ public class Solution {
 
         public void run() {
             try {
-                while (true){
+                while (true) {
                     if (countSeconds == 0) {
                         System.out.println("Марш!");
                         break;
@@ -37,7 +37,8 @@ public class Solution {
                     sleep(1000);
                 }
             } catch (InterruptedException e) {
-                System.out.print("Прервано!");;
+                System.out.print("Прервано!");
+                ;
             }
         }
     }

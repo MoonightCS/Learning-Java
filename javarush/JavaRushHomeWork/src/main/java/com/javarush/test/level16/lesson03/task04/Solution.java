@@ -17,6 +17,7 @@ public class Solution {
             System.out.println(element);
         }
     }
+
     public static class SpecialThread implements Runnable {
 
         @Override

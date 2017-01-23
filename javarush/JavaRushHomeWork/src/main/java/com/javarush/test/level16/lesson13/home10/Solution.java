@@ -1,6 +1,9 @@
 package com.javarush.test.level16.lesson13.home10;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /* Последовательный вывод файлов
 1. Разберись, что делает программа.

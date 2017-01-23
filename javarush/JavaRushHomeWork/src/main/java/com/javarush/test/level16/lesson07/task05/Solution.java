@@ -21,7 +21,7 @@ public class Solution {
         }
 
         public void run() {
-            boolean  isAlreadyTakenOff = false;
+            boolean isAlreadyTakenOff = false;
             while (!isAlreadyTakenOff) {
                 if (RUNWAY.getTakingOffPlane() == null) {    //если взлетная полоса свободна
                     RUNWAY.setTakingOffPlane(this);

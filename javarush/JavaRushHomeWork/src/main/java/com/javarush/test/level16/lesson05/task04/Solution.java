@@ -27,6 +27,7 @@ public class Solution {
             System.out.println(getName() + " finished");
         }
     }
+
     private static void eating() {
         try {
             Thread.sleep(2000);

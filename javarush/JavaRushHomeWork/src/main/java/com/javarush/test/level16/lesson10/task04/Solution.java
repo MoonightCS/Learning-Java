@@ -22,6 +22,7 @@ public class Solution {
     public static class TestThread implements Runnable {
 
         private static boolean isInterrupted = false;
+
         public void run() {
             while (!isInterrupted) {
                 try {

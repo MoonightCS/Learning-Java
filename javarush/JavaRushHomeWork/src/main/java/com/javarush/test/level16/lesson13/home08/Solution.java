@@ -66,7 +66,7 @@ public class Solution {
         @Override
         public String toString() {
             String s = result.toString();
-            return s.substring(1, s.length()-1);
+            return s.substring(1, s.length() - 1);
         }
     }
 }

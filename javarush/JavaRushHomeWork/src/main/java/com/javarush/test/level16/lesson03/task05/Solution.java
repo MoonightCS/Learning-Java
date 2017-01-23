@@ -17,7 +17,7 @@ public class Solution {
         violin.start();
     }
 
-    public static class Violin implements MusicalInstrument{
+    public static class Violin implements MusicalInstrument {
         private String owner;
 
         public Violin(String owner) {

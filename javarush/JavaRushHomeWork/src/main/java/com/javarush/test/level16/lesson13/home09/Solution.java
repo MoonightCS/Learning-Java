@@ -37,9 +37,10 @@ public class Solution {
         System.out.println(t1.getResult());
         System.out.println(t2.getResult());
     }
+
     public static class Read3Strings extends Thread {
 
-        private  String result;
+        private String result;
 
         public String getResult() {
             return result;
