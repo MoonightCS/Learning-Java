@@ -11,8 +11,8 @@ import java.io.*;
 public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName1  = reader.readLine();
-        String fileName2  = reader.readLine();
+        String fileName1 = reader.readLine();
+        String fileName2 = reader.readLine();
 
         FileInputStream inputStream1 = new FileInputStream(fileName1);
         FileInputStream inputStream2 = new FileInputStream(fileName2);

@@ -14,6 +14,7 @@ package com.javarush.test.level18.lesson10.home05;
 -3.51 - -4
 */
 // 3 4 4 -3 -3 -4
+
 import java.io.*;
 
 public class Solution {

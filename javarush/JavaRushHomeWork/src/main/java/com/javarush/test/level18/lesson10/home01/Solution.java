@@ -8,7 +8,6 @@ package com.javarush.test.level18.lesson10.home01;
 */
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Solution {
