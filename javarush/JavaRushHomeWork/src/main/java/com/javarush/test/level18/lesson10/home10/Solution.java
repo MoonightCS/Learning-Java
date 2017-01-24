@@ -10,7 +10,6 @@ package com.javarush.test.level18.lesson10.home10;
 Файлы переписывать в строгой последовательности, сначала первую часть, потом вторую, ..., в конце - последнюю.
 Закрыть потоки. Не использовать try-with-resources
 */
-
 import java.io.*;
 import java.util.Iterator;
 import java.util.Set;
