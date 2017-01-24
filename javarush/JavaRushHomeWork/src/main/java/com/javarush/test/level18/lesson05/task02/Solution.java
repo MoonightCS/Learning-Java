@@ -18,9 +18,9 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         FileInputStream inputStream = new FileInputStream(reader.readLine());
         int count = 0;
-        while(inputStream.available() > 0){
-            if(inputStream.read() == 44){
-                count ++;
+        while (inputStream.available() > 0) {
+            if (inputStream.read() == 44) {
+                count++;
             }
         }
         System.out.println(count);

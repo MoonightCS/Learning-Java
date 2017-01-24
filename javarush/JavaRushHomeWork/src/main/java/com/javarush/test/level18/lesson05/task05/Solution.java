@@ -33,7 +33,7 @@ public class Solution {
 
     }
 
-    public static class DownloadException extends Exception{
+    public static class DownloadException extends Exception {
 
     }
 }
