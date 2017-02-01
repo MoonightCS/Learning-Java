@@ -8,7 +8,7 @@ import java.util.List;
 Сделайте так, чтобы сериализация класса JavaRush была возможной
 */
 public class Solution {
-    public static class JavaRush implements Serializable{
+    public static class JavaRush implements Serializable {
         public List<User> users = new ArrayList<>();
     }
 }
