@@ -16,9 +16,9 @@ public class Solution {
 
     public static void main(String[] args) throws Exception {
         final String fileName = "/Users/bogdanpopov/Desktop/learning-java/javarush/JavaRushHomeWork/src/test/resources/test.properties";
-        properties.put("website","https://ru.wikipedia.org/");
-        properties.put("language","Russian");
-        properties.put("key","value");
+        properties.put("website", "https://ru.wikipedia.org/");
+        properties.put("language", "Russian");
+        properties.put("key", "value");
         Map<String, String> test = new HashMap<>(properties);
         save(new FileOutputStream(fileName));
         properties.clear();
@@ -26,17 +26,18 @@ public class Solution {
 
         //Test
         System.out.println("before save");
-        for (Map.Entry<String, String> entry: test.entrySet()) {
+        for (Map.Entry<String, String> entry : test.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
 
         System.out.println("\nafter load");
-        for (Map.Entry<String, String> entry: properties.entrySet()) {
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
 
 
     }
+
     public static void fillInPropertiesMap() throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         final String fileName = reader.readLine();

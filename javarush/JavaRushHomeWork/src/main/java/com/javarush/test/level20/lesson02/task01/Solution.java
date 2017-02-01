@@ -1,7 +1,5 @@
 package com.javarush.test.level20.lesson02.task01;
 
-import org.junit.Assert;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
