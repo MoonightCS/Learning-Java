@@ -4,12 +4,10 @@ package com.javarush.test.level21.lesson16.big01;
 import java.util.ArrayList;
 
 /*
-Задание 8
-В методе run сделай цикл от 1 до 100. Это и будет наш забег.
-В теле цикла вызываем сначала move, затем print.
-Чтобы весь цикл не отработал за долю секунды - добавь в него еще Thread.sleep(200);
-
-
+Задание 10
+Еще нужно написать метод print класса Hippodrome.
+В нем тоже все просто: в цикле для каждой лошади вызываем ее метод print.
+Ну, и еще выведи после цикла пару пустых строк: System.out.println() - чтобы было красивее.
  */
 
 public class Hippodrome {
@@ -22,15 +20,24 @@ public class Hippodrome {
     }
 
     public void print() {
-
+        for (Horse horse: getHorses()) {
+            horse.print();
+            System.out.printf("\n\n");
+        }
     }
 
     public void move() {
-
+        for (Horse horse : getHorses()) {
+            horse.move();
+        }
     }
 
-    public void run() {
-
+    public void run() throws InterruptedException {
+        for (int i = 0; i < 100; i++) {
+            move();
+            print();
+            Thread.sleep(200);
+        }
     }
 
     public static void main(String[] args) {
