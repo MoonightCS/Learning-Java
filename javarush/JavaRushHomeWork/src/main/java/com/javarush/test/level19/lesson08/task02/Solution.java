@@ -28,6 +28,6 @@ public class Solution {
     public static class TestString {
         public void printSomething() {
             System.out.println("it's a text for testing");
-    }
+        }
     }
 }

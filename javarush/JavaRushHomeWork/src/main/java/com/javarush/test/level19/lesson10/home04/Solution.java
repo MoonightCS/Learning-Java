@@ -42,9 +42,10 @@ public class Solution {
         }
         reader.close();
     }
+
     private static boolean checkLine(String line) {
         int count = 0;
-        for (String str: words) {
+        for (String str : words) {
             if (line.contains(str)) {
                 ++count;
             }

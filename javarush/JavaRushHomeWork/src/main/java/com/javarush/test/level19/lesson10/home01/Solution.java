@@ -25,7 +25,6 @@ package com.javarush.test.level19.lesson10.home01;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -39,7 +38,7 @@ public class Solution {
             lineParams = line.split(" ");
             if (data.containsKey(lineParams[0])) {
                 Double value = data.get(lineParams[0]);
-                data.put(lineParams[0], Double.parseDouble(lineParams[1])+ value);
+                data.put(lineParams[0], Double.parseDouble(lineParams[1]) + value);
             } else {
                 data.put(lineParams[0], Double.parseDouble(lineParams[1]));
             }

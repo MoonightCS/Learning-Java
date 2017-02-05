@@ -23,7 +23,6 @@ package com.javarush.test.level19.lesson10.home02;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +47,7 @@ public class Solution {
             }
         }
         reader.close();
-        for (Map.Entry<String, Double> entry: data.entrySet()) {
+        for (Map.Entry<String, Double> entry : data.entrySet()) {
             if (entry.getValue() == max) {
                 System.out.println(entry.getKey());
             }

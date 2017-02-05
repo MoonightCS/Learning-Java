@@ -15,7 +15,7 @@ import java.util.Scanner;
 */
 
 public class Solution {
-    public static class PersonScannerAdapter implements PersonScanner{
+    public static class PersonScannerAdapter implements PersonScanner {
         private final Scanner scanner;
 
         public PersonScannerAdapter(Scanner scanner) {
