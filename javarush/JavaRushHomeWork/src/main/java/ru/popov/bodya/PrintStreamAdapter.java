@@ -33,6 +33,7 @@ public class PrintStreamAdapter {
         //выводим ее в консоль
         System.out.println(reverseString);
     }
+
     public static void printSomething() {
         System.out.println("Hi");
         System.out.println("My name is Amigo");

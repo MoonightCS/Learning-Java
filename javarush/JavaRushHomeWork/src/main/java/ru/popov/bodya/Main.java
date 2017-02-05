@@ -1,20 +1,18 @@
 package ru.popov.bodya;
 
+import java.util.List;
+
 public class Main {
 
-    static int a;
 
-    static {
-        a = 3;
-    }
-    public static void main(String[] args) {
-        System.out.println(a);
-        System.out.println(b);
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Class[] interfaces = List.class.getInterfaces();
+        for (Class clazz : interfaces) {
+            System.out.println(clazz);
+        }
+        Main main = new Main();
+
     }
 
-    static int b = a;
-    static {
-        a = 2;
-    }
 
 }
