@@ -36,7 +36,8 @@ public class Hippodrome {
             }
         });
     }
-    public void printWinner(){
+
+    public void printWinner() {
         System.out.printf("Winner is %s!", getWinner().getName());
     }
 

@@ -22,7 +22,7 @@ public class Solution {
         System.out.println(clone.branches);
     }
 
-    public static class Plant{
+    public static class Plant {
         private String name;
 
         public Plant(String name) {
@@ -49,9 +49,9 @@ public class Solution {
         @Override
         protected Tree clone() throws CloneNotSupportedException {
             if (this.getBranches() != null)
-                return new Tree (this.getName(), this.getBranches().clone());
+                return new Tree(this.getName(), this.getBranches().clone());
             else
-                return new Tree (this.getName(), null);
+                return new Tree(this.getName(), null);
         }
     }
 }
