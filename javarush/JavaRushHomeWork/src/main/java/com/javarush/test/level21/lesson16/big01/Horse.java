@@ -2,11 +2,15 @@ package com.javarush.test.level21.lesson16.big01;
 
 /*
 
-Задание 5
-Закончим написание класса "лошадь"
-Добавь конструктор с параметрами (name, speed, distance).
-Добавь getter'ы и setter'ы для всех полей класса Horse.
-Делай все методы public, если явно не указано обратное.
+Задание 13
+Теперь вернемся к методу print класса Horse.
+Т.к. мы работаем с консолью, то все лошади на бегах будут выглядеть примерно так:
+........Sleven                       <- лошадь Слевин
+....Lucky                            <- лошадь Лаки
+..........Gomer                      <- лошадь Гомер
+
+Другими словами, в методе print надо вывести на экран строку состоящую из точек и имени лошади.
+Количество точек равно distance, округленному до целого числа.
 
  */
 
@@ -23,11 +27,16 @@ public class Horse {
     }
 
     public void move() {
-
+        distance += speed * Math.random();
     }
 
     public void print() {
-
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < distance; i++) {
+            stringBuilder.append(".");
+        }
+        stringBuilder.append(name);
+        System.out.println(stringBuilder.toString());
     }
 
     public void setName(String name) {
