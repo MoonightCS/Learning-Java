@@ -10,12 +10,18 @@ getTokens("level22.lesson13.task01", ".")
 {"level22", "lesson13", "task01"}
 */
 
-public class Solution {
-    public static void main(String[] args) {
+import java.util.StringTokenizer;
 
-    }
+public class Solution {
 
     public static String[] getTokens(String query, String delimiter) {
-        return null;
+
+        StringTokenizer stringTokenizer = new StringTokenizer(query, delimiter);
+        String[] tokens = new String[stringTokenizer.countTokens()];
+        int i = 0;
+        while (stringTokenizer.hasMoreTokens()) {
+            tokens[i++] = stringTokenizer.nextToken();
+        }
+        return tokens;
     }
 }

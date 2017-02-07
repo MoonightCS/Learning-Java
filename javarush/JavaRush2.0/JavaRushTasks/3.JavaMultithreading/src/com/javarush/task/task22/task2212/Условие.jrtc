@@ -1,0 +1,23 @@
+<div class="wdghtml" taskKey="com.javarush.task.task22.task2212">
+<h3>Проверка номера телефона</h3>
+<p>Метод <mark>checkTelNumber</mark> должен проверять, является ли аргумент <mark class="user">telNumber</mark> валидным номером телефона.</p>
+<p><strong>Критерии валидности:</strong><br />
+1) если номер начинается с &#8216;<strong>+</strong>&#8216;, то он содержит <span class="text-user"><strong>12</strong></span> цифр<br />
+2) если номер начинается с цифры или открывающей скобки, то он содержит <span class="text-user"><strong>10</strong></span> цифр<br />
+3) может содержать <span class="text-user"><strong>0-2</strong></span> знаков &#8216;<strong>&#8212;</strong>&#8216;, которые не могут идти подряд<br />
+4) может содержать <span class="text-user"><strong>1</strong></span> пару скобок &#8216;<strong>(</strong>&#8216; и &#8216;<strong>)</strong>&#8216; , причем если она есть, то она расположена левее знаков &#8216;-&#8216;<br />
+5) скобки внутри содержат четко <span class="text-user"><strong>3</strong></span> цифры<br />
+6) номер не содержит букв<br />
+7) номер заканчивается на цифру</p>
+<p><strong>Примеры:</strong><br />
+<code>+380501234567 - true<br />
++38(050)1234567 - true<br />
++38050123-45-67 - true<br />
+050123-4567 - true<br />
++38)050(1234567 - false<br />
++38(050)1-23-45-6-7 - false<br />
+050ххх4567 - false<br />
+050123456 - false<br />
+(0)501234567 - false</code></p>
+
+</div>

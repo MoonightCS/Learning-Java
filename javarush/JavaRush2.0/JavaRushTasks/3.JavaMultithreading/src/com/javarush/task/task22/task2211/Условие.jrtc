@@ -1,0 +1,6 @@
+<div class="wdghtml" taskKey="com.javarush.task.task22.task2211">
+<h3>Смена кодировки</h3>
+<p>В метод <mark>main</mark> первым параметром приходит имя файла, тело которого в кодировке <strong>Windows-1251</strong>.<br />
+В метод <mark>main</mark> вторым параметром приходит имя файла, в который необходимо записать содержимое первого файла в кодировке <strong>UTF-8</strong>.</p>
+
+</div>
