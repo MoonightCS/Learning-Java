@@ -1,4 +1,119 @@
-<div class="wdghtml" taskKey="com.javarush.task.task23.task2312.big09">
+<div class="wdghtml" taskKey="com.javarush.task.task23.task2312.big18">
+<h3>Змейка(18)</h3>
+<p><strong> Отлично!</strong><br />
+<strong>Запускаем</strong> и <strong>наслаждаемся</strong> змейкой.</p>
+
+<hr>
+<h3>Змейка(17)</h3>
+<p>Теперь закончим класс <span class="text-corporate"><strong>Snake</strong></span>.</p>
+<p>Змея состоит из кусочков. Давай каждый ход просто добавлять один кусочек со стороны головы,<br />
+а самый последний &#8212; <strong>удалять</strong>. Тогда получится, что змея ползет.<br />
+Добавлять кусочек нужно рядом с текущей головой (<em>кусочком номер</em> <span class="text-user"><strong>0</strong></span>).<br />
+С какой стороны добавлять зависит от <mark class="user">direction</mark> (<strong><em>UP, DOWN, LEFT, RIGHT</em></strong>).</p>
+<p><strong>Подсказка:<br />
+</strong>а) Как добавить кусочек змеи в начало списка <strong><span class="text-red">sections</span></strong>?<br />
+<mark>sections.add(0, <strong>new_section</strong>);</mark><br />
+б) А как удалить последний?<br />
+<mark>sections.remove(<strong>sections.size()-1</strong>);</mark></p>
+<p><strong>Необходимо реализовать метод </strong><mark>move(int <strong>dx</strong>, int <strong>dy</strong>)</mark><strong>:</strong><br />
+б) проверить, не вылезла ли она за границу комнаты (<em>если да, то змея умирает</em>)<br />
+в) проверить, не совпадает ли она с уже существующими кусочками змеи (<em>если да, то змея умирает</em>)<br />
+г) добавить голову к змее (<em>со стороны головы</em>) и удалить последний кусочек из хвоста.<br />
+д) вызвать метод <mark>eatMouse</mark> у статического объекта game класса <strong><span class="text-corporate">Room</span></strong>, если координаты мыши совпадают с координатами головы змеи.<br />
+е) если змея поймала мышь (к<em>оординаты головы совпадают с координатами мыши</em>), то удалять кусок из хвоста не надо.</p>
+
+<hr>
+<h3>Змейка(16)</h3>
+<p>Ничто не вечно. Так и змея <strong>должна умирать</strong>, если она врезается в стену или саму себя.</p>
+<p>Для определения, не пересекается ли змея сама с собой, можно сделать очень простую проверку:<br />
+содержит ли список sections &#171;<em><strong>новую голову змеи</strong></em>&#171;.</p>
+<p><strong>Код для этого будет выглядеть примерно так:</strong><br />
+<span class="text-neon">if (sections.contains(head))</span></p>
+<p>При этом <mark class="user">head</mark> должен быть еще не добавлен в список <span class="text-red">sections</span>, иначе будет всегда <strong><span class="text-neon">true</span></strong>.<br />
+Но чтобы этот код работал, надо реализовать методы сравнения объектов (<mark>equals</mark> и <mark>hashCode</mark>) в классе <span class="text-corporate"><strong>SnakeSection</strong></span>.</p>
+<p><strong>Подсказка:</strong><br />
+<em>Используй </em><span class="text-neon">Alt+Insert</span><em> в <strong>Intellij IDEA</strong> для автоматической генерации методов </em><mark>equals</mark><em> и </em><mark>hashCode</mark><em>.</em></p>
+<p><strong>Задание:</strong><br />
+а) реализуй методы <mark>equals</mark> и <mark>hashCode</mark> в классе SnakeSection.<br />
+б) реализуй метод <mark>checkBorders(SnakeSection <strong>head</strong>)</mark>: если голова змеи за границами комнаты &#8212; змея умирает (<mark class="user">isAlive</mark> <em>=</em> <span class="text-neon"><strong>false</strong></span>)<br />
+в) реализуй метод <mark>checkBody(SnakeSection <strong>head</strong>)</mark>: если голова змеи пересекается с ее телом &#8212; змея умирает (<mark class="user">isAlive</mark> = <span class="text-neon"><strong>false</strong></span>)</p>
+
+<hr>
+<h3>Змейка(15)</h3>
+<p>Теперь осталось допилить змею.</p>
+<p><strong>Вот что я предлагаю насчет движения змеи:</strong><br />
+Змея состоит из кусочков. Давай каждый ход просто добавлять один кусочек со стороны головы,<br />
+а самый последний &#8212; удалять. Тогда получится, что <strong>змея ползет</strong>.</p>
+<p>Давай добавим два метода move, один без параметров, а другой с двумя параметрами типа <span class="text-corporate">int</span>.</p>
+<p><strong>В методе</strong> <mark>move</mark> <strong>без параметров необходимо:</strong><br />
+а) прекратить движение если змея умерла(<mark class="user">isAlive</mark> <em>==</em> <span class="text-neon"><strong>false</strong></span>)<br />
+б) вызвать метод <mark>move(<strong>0</strong>, <strong>-1</strong>)</mark> если направление движения равно <mark class="green">SnakeDirection</mark>.<mark class="user">UP</mark><br />
+в) вызвать метод <mark>move(<strong>1</strong>, <strong>0</strong>)</mark> если направление движения равно <mark class="green">SnakeDirection</mark>.<mark class="user">RIGHT</mark><br />
+г) вызвать метод <mark>move(<strong>0</strong>, <strong>1</strong>)</mark> если направление движения равно <mark class="green">SnakeDirection</mark>.<mark class="user">DOWN</mark><br />
+д) вызвать метод <mark>move(<strong>-1</strong>, <strong>0</strong>)</mark> если направление движения равно <mark class="green">SnakeDirection</mark>.<mark class="user">LEFT</mark></p>
+<p>Метод move с параметрами <span class="text-corporate">int</span>, <span class="text-corporate">int</span> пока оставим пустым.</p>
+
+<hr>
+<h3>Змейка(14)</h3>
+<p>Теперь поработаем над методом <mark>print()</mark>.</p>
+<p><strong>Надо:</strong><br />
+а) вывести на экран прямоугольник из точек размером <mark class="user">width</mark> x <mark class="user">height</mark>.<br />
+б) тело змеи отметить символом &#171;<em><strong>x</strong></em>&#171;-<strong>английское</strong><br />
+в) голову змеи нарисовать символом &#171;<em><strong>X</strong></em>&#171;-<strong>английское</strong>.</p>
+<p><strong>Подсказка:</strong><br />
+а) удобно сначала создать матрицу типа <span class="text-corporate"><strong>int[][]</strong></span> с размером (<mark class="user">height</mark> x <mark class="user">width</mark>)<br />
+б) затем пройтись по всем объектам и отрисовать их в матрицу.<br />
+Например, тело змеи &#8212; <span class="text-user"><strong>1</strong></span>, голова змеи &#8212; <strong><span class="text-user">2</span></strong>, мышь &#8212; <strong><span class="text-user">3</span></strong>.</p>
+
+<hr>
+<h3>Змейка(13)</h3>
+<p>Предлагаю тебе в этот раз написать специальный метод <mark>sleep()</mark>, который будет делать паузу в зависимости от длины змеи (<em>количества элементов в</em> <strong><span class="text-corporate">sections</span></strong>).<br />
+Придумай какой-нибудь хитрый алгоритм. Чтобы на первом уровне пауза была <span class="text-user"><strong>500</strong></span> <strong>миллисекунд</strong>,<br />
+а к <strong><span class="text-user">10</span></strong> <strong>уровню</strong> постепенно уменьшилась до <span class="text-user"><strong>300</strong></span>. А к <strong><span class="text-user">15</span></strong> до <span class="text-user"><strong>200</strong></span>. И дальше оставалась постоянной.</p>
+
+<hr>
+<h3>Змейка(12)</h3>
+<p>Змея у нас есть, пусть и мышь будет.</p>
+<p><strong>Добавить в метод main:</strong><br />
+a) вызов метода <mark>createMouse()</mark>.<br />
+б) вызов метода <mark>run()</mark>.<br />
+Без него ничего работать не будет. В нем вся основная логика.<br />
+Неплохо получилось, но я все-таки внесу пару правок.<br />
+Кстати, как насчет написать метод <mark>sleep</mark>?<br />
+Ты уже понял из предыдущих задач, что в методе <mark>run</mark> нужна пауза.<br />
+Но насколько я помню, скорость в змейке должна расти при росте ее длины.<br />
+Значит чем длиннее змея, тем выше скорость и меньше пауза.</p>
+
+<hr>
+<h3>Змейка(11)</h3>
+<p>Теперь логика управления мышью.</p>
+<p>С мышью у нас будут происходить две вещи.</p>
+<p>Первая - змея съедает мышь.</p>
+<p>Вторая - появляется новая мышь в случайной точке комнаты.</p>
+<p></p>
+<p>Надо написать и реализовать метод createMouse() в классе Room.</p>
+<p>В этом методе мы просто должны создавать новую мышь со случайными координатами в комнате.</p>
+<p>Как получить случайные координаты?</p>
+<p>Это ты уже должен был знать. На всякий случай даю подсказку:</p>
+<p>int x = (int) (Math.random() * width);</p>
+<p></p>
+<p>Еще понадобится метод - eatMouse(), на случай, если мышь все-таки кто-то съест :)</p>
+<p>Пока сложной логики в этом методе не будет - просто будем вызывать метод createMouse и все.</p>
+
+<hr>
+<h3>Змейка(10)</h3>
+<p>Займемся методом <mark class="user">main</mark>.</p>
+<p>Для начала надо создать в классе <span class="text-corporate"><strong>Room</strong></span> статическое поле <mark class="user">game</mark> типа <strong><span class="text-corporate">Room</span></strong>. Доступ к переменной должен быть из всех классов.</p>
+<p><strong>Затем в методе </strong><mark>main</mark><strong>:</strong><br />
+а) Создать змею &#8212; <span class="text-green">объект</span> типа <strong><span class="text-corporate">Snake</span></strong>.<br />
+б) Создать комнату &#8212; <span class="text-green">объект</span> типа <span class="text-corporate"><strong>Room</strong></span> и передать в него ширину, высоту и змею.<br />
+в) Установить змее <mark class="user">direction</mark> равным <mark>SnakeDirection</mark>.<mark class="user">DOWN</mark></p>
+<p>Чего еще не хватает? Собственно метода, в котором будет идти вся игровая логика.<br />
+<strong>И еще нужен метод, который бы отрисовывал все это на экране:</strong><br />
+а) создать метод <mark>void run()</mark><br />
+б) создать метод <mark>void print()</mark></p>
+
+<hr>
 <h3>Змейка(9)</h3>
 <p>Еще остался самый главный класс &#8212; <span class="text-corporate"><strong>Room</strong></span>.<br />
 Что нам нужно для его описания?<br />
