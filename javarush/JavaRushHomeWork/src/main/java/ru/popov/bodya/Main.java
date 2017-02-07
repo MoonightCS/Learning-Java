@@ -4,14 +4,19 @@ import java.util.List;
 
 public class Main {
 
+    static {
+        System.out.println("static 1");
+    }
+    private final static String str;
 
     public static void main(String[] args) throws CloneNotSupportedException {
-        Class[] interfaces = List.class.getInterfaces();
-        for (Class clazz : interfaces) {
-            System.out.println(clazz);
-        }
-        Main main = new Main();
+        System.out.println(str);
 
+    }
+
+    static {
+        str = "das";
+        System.out.println("static 2");
     }
 
 
