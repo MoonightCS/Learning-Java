@@ -10,7 +10,7 @@ public class Solution {
         this.name = name;
     }
 
-     String getName() {
+    String getName() {
         return name;
     }
 

@@ -31,7 +31,7 @@ public class Solution {
         print(solution.getSubscriptions());
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return new AbstractDbSelectExecutor<User>() {
 
             @Override
@@ -41,7 +41,7 @@ public class Solution {
         }.execute();
     }
 
-    public List<Location> getLocations(){
+    public List<Location> getLocations() {
         return new AbstractDbSelectExecutor<Location>() {
 
             @Override
@@ -51,7 +51,7 @@ public class Solution {
         }.execute();
     }
 
-    public List<Server> getServers(){
+    public List<Server> getServers() {
         return new AbstractDbSelectExecutor<Server>() {
 
             @Override
@@ -61,7 +61,7 @@ public class Solution {
         }.execute();
     }
 
-    public List<Subject> getSubjects(){
+    public List<Subject> getSubjects() {
         return new AbstractDbSelectExecutor<Subject>() {
 
             @Override
@@ -70,7 +70,8 @@ public class Solution {
             }
         }.execute();
     }
-    public List<Subscription> getSubscriptions(){
+
+    public List<Subscription> getSubscriptions() {
         return new AbstractDbSelectExecutor<Subscription>() {
 
             @Override

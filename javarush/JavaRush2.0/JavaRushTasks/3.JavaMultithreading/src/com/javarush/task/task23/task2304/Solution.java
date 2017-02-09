@@ -40,7 +40,7 @@ public class Solution {
         }
     }
 
-    private class NameDataProvider implements DbDataProvider{
+    private class NameDataProvider implements DbDataProvider {
 
         @Override
         public void refreshAllData(Map criteria) {
