@@ -61,9 +61,9 @@ public class Solution {
     private static Double calculateChange(Stock stock) {
         Double result;
         if (stock.containsKey("change")) {
-            result = (Double)stock.get("change");
+            result = (Double) stock.get("change");
         } else
-            result = (Double)stock.get("last") - (Double)stock.get("open");
+            result = (Double) stock.get("last") - (Double) stock.get("open");
         return result;
     }
 

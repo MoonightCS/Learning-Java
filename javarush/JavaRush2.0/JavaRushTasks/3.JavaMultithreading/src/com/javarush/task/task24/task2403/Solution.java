@@ -2,7 +2,6 @@ package com.javarush.task.task24.task2403;
 
 import java.io.Serializable;
 import java.rmi.Remote;
-import java.rmi.server.RemoteObject;
 import java.util.ArrayDeque;
 import java.util.EventListener;
 
@@ -26,6 +25,7 @@ public class Solution {
         }
 
     }
+
     public static class D implements EventListener {
 
     }

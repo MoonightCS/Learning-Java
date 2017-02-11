@@ -25,6 +25,7 @@ public class Cat implements Pet {
      * Мышь пищит.
      * Томас говорит мяу!
      * <p/>
+     *
      * @param i количество букв 'я' в слове мяу
      * @return экземпляр класса CatPet
      */

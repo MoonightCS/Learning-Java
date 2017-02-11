@@ -20,6 +20,7 @@ public class Solution {
                 countItems++;
                 System.out.println(name + " item " + countItems);
             }
+
             @Override
             public Iterator next() {
                 return getIterator(name);

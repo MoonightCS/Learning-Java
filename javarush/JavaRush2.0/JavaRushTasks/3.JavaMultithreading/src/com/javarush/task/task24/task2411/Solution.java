@@ -12,6 +12,7 @@ public class Solution extends C {
             System.out.print(value);
         }
     }
+
     private A a = new A() {
         { //у анонимных классов нет своих конструкторов, но что-то можно сделать в блоке инициализации класса
             value = "Y";

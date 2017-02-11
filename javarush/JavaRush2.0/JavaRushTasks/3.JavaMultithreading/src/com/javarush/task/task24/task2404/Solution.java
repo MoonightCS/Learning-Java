@@ -1,10 +1,6 @@
 package com.javarush.task.task24.task2404;
 
-import com.javarush.task.task24.task2404.HasHeight;
-import com.javarush.task.task24.task2404.HasWidth;
-import com.javarush.task.task24.task2404.Point;
-
-/* 
+/*
 Рефакторинг Rectangle
 В классе Rectangle:
 1. Измени методы castToHasHeight и getWidth, чтобы они возвращали объекты типов HasHeight и HasWidth соответственно.
@@ -30,7 +26,7 @@ public class Solution {
     }
 
 
-    public static class Rectangle{
+    public static class Rectangle {
         private Point point1;
         private Point point2;
 
