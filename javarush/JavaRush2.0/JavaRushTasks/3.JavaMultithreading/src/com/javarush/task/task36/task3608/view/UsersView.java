@@ -22,6 +22,11 @@ public class UsersView implements View {
         controller.onShowAllDeletedUsers();
     }
 
+    public void fireEventOpenUserEditForm(long id) {
+        controller.onOpenUserEditForm(id);
+    }
+
+
     @Override
     public void refresh(ModelData modelData) {
         if (!modelData.isDisplayDeletedUserList()) {
@@ -34,7 +39,7 @@ public class UsersView implements View {
         for (User user : modelData.getUsers()) {
             System.out.println("\t" + user);
         }
-        System.out.println("==================================================");
+        System.out.println("===================================================");
 
     }
 

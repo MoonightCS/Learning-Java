@@ -27,6 +27,14 @@ public class EditUserView implements View {
 
     private Controller controller;
 
+    public void fireEventUserDeleted(long id) {
+        controller.onUserDelete(id);
+    }
+
+    public void fireEventUserChanged(String name, long id, int level) {
+        controller.onUserChange(name, id, level);
+    }
+
     @Override
     public void refresh(ModelData modelData) {
         System.out.println("User to be edited:");
