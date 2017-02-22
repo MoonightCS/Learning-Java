@@ -1,13 +1,15 @@
 package com.javarush.task.task29.task2909.human;
 
 /*
-Задания:
-1.1. Подъем поля. Подними поле children в базовый класс.
-1.2. Подъем метода. Подними сеттер и геттер для children в базовый класс.
-1.3. Инкапсуляция коллекции.
-1.3.1. Метод getChildren должен возвращать не модифицируемое представление списка children.
-1.3.2. Убери сеттер для children.
-1.3.3. Добавь методы addChild(Human) и removeChild(Human). Реализуй их логику.
+Рефакторинг (5)
+5.1. Создание шаблонного метода.
+5.1.1. Добавь в класс Human метод String getPosition(), который должен возвращать строку «Человек«.
+5.1.2. Переопредели этот метод в классе Student и Teacher. Метод должен возвращать «Студент» и «Преподаватель» соответственно.
+5.1.3. Замени метод printData в подклассах шаблонным методом в базовом классе, использующим getPosition().
+5.2. Замена делегирования наследованием. Класс Worker должен наследоваться от Human, а не содержать его.
+5.3. Переименование метода. Переименуй метод setSlr, чтобы было понятно сеттером чего является этот метод.
+
+
  */
 
 import java.util.ArrayList;
@@ -55,33 +57,12 @@ public class Human implements Alive {
         nextId++;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public List<Human> getChildren() {
         return Collections.unmodifiableList(children);
+    }
+
+    public String getPosition() {
+        return "Человек";
     }
 
     @Override
@@ -91,5 +72,34 @@ public class Human implements Alive {
 
     public void printSize() {
         System.out.println("Рост: " + size[0] + " Вес: " + size[1]);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void printData() {
+        System.out.println(getPosition() + ": " + name);
     }
 }

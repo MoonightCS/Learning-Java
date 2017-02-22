@@ -1,11 +1,7 @@
 package com.javarush.task.task29.task2909.human;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Teacher extends Human {
+public class Teacher extends UniversityPerson {
     private int numberOfStudents;
-    private String university;
 
     public Teacher(String name, int age, int numberOfStudents) {
 
@@ -13,24 +9,19 @@ public class Teacher extends Human {
         this.numberOfStudents = numberOfStudents;
     }
 
+    public void teach() {
+    }
 
 
+    @Override
+    public String getPosition() {
+        return "Преподаватель";
+    }
+
+    @Override
     public void live() {
         teach();
     }
 
-    public void teach() {
-    }
 
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public void printData() {
-        System.out.println("Преподаватель: " + name);
-    }
 }
