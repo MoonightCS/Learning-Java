@@ -1,15 +1,16 @@
 package com.javarush.task.task29.task2909.human;
-
 /*
-Рефакторинг (5)
-5.1. Создание шаблонного метода.
-5.1.1. Добавь в класс Human метод String getPosition(), который должен возвращать строку «Человек«.
-5.1.2. Переопредели этот метод в классе Student и Teacher. Метод должен возвращать «Студент» и «Преподаватель» соответственно.
-5.1.3. Замени метод printData в подклассах шаблонным методом в базовом классе, использующим getPosition().
-5.2. Замена делегирования наследованием. Класс Worker должен наследоваться от Human, а не содержать его.
-5.3. Переименование метода. Переименуй метод setSlr, чтобы было понятно сеттером чего является этот метод.
-
-
+Рефакторинг (8)
+        8.1. Удаление сеттера. Удали метод setId(). Поле id должно устанавливаться только в момент
+        создания объекта.
+        8.2. Сокрытие метода (поля). Изменить область видимости поля nextId в соответствии с
+        областью его использования.
+        8.3. Замена исключения проверкой условия. Перепиши метод removeStudent(int index), чтобы
+        он удалял студента из списка студентов только, если он там есть. Метод не должен кидать
+        исключение.
+        8.4. Удаление управляющего флага. Перепиши метод findDimaOrSasha(), сохранив логику его
+        работы. В методе не должны использоваться флаги типа found, воспользуйся оператором
+        break.
  */
 
 import java.util.ArrayList;
@@ -18,20 +19,20 @@ import java.util.List;
 
 public class Human implements Alive {
 
-    public static int nextId = 0;
+    private static int nextId = 0;
     private int id;
     private List<Human> children = new ArrayList<>();
     protected int age;
     protected String name;
 
-    protected int[] size;
+    public class Size {
+        public int height;
+        public int weight;
+    }
 
+    protected Size size;
 
-    public static final int FIRST = 1;
-    public static final int SECOND = 2;
-    public static final int THIRD = 3;
-    public static final int FOURTH = 4;
-    private int bloodGroup;
+    private BloodGroup bloodGroup;
 
     public void addChild(Human human) {
         children.add(human);
@@ -39,14 +40,6 @@ public class Human implements Alive {
 
     public void removeChild(Human human) {
         children.remove(human);
-    }
-
-    public void setBloodGroup(int code) {
-        bloodGroup = code;
-    }
-
-    public int getBloodGroup() {
-        return bloodGroup;
     }
 
 
@@ -71,7 +64,7 @@ public class Human implements Alive {
     }
 
     public void printSize() {
-        System.out.println("Рост: " + size[0] + " Вес: " + size[1]);
+        System.out.println("Рост: " + size.height + " Вес: " + size.weight);
     }
 
     public int getAge() {
@@ -86,6 +79,14 @@ public class Human implements Alive {
         return id;
     }
 
+    public BloodGroup getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(BloodGroup bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
 
     public void setAge(int age) {
         this.age = age;
@@ -95,9 +96,6 @@ public class Human implements Alive {
         this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void printData() {
         System.out.println(getPosition() + ": " + name);
