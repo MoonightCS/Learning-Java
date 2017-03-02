@@ -1,23 +1,119 @@
 package com.javarush.task.task30.task3008.client;
 
 /*
-3) Создай внутренний класс SocketThread унаследованный от Thread в классе Client.
-Он будет отвечать за поток, устанавливающий сокетное соединение и читающий сообщения сервера. Класс должен иметь публичный модификатор доступа.
-4) Создай поле Connection connection в классе Client. Используй модификатор доступа, который позволит обращаться к этому полю из класса потомков,
-но запретит обращение из других классов вне пакета.
-5) Добавь приватное поле-флаг boolean clientConnected в класс Client. Проинициализируй его значением false. В дальнейшем оно будет устанавливаться в true,
-если клиент подсоединен к серверу или в false в противном случае. При объявлении этого поля используй ключевое слово, которое позволит
- гарантировать что каждый поток, использующий поле clientConnected, работает с актуальным, а не кэшированным его значением.
+Напишем реализацию класса SocketThread. Начнем с простых вспомогательных методов.
+
+Добавь методы, которые будут доступны классам потомкам и не доступны остальным классам вне пакета:
+1) void processIncomingMessage(String message) – должен выводить текст message в консоль.
+2) void informAboutAddingNewUser(String userName) – должен выводить в консоль информацию о том, что участник с именем userName присоединился к чату.
+3) void informAboutDeletingNewUser(String userName) – должен выводить в консоль, что участник с именем userName покинул чат.
+4) void notifyConnectionStatusChanged(boolean clientConnected) – этот метод должен:
+а) Устанавливать значение поля clientConnected внешнего объекта Client в соответствии с переданным параметром.
+б) Оповещать (пробуждать ожидающий) основной поток класса Client.
+
+Подсказка: используй синхронизацию на уровне текущего объекта внешнего класса и метод notify. Для класса SocketThread внешним классом является класс Client.
  */
 
 import com.javarush.task.task30.task3008.Connection;
+import com.javarush.task.task30.task3008.ConsoleHelper;
+import com.javarush.task.task30.task3008.Message;
+import com.javarush.task.task30.task3008.MessageType;
+
+import java.io.IOException;
 
 public class Client {
+
+    public void run() {
+        SocketThread socketThread = getSocketThread();
+        socketThread.setDaemon(true);
+        socketThread.start();
+
+        synchronized (this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка, выход из программы");
+                return;
+            }
+        }
+
+        if (clientConnected) {
+            ConsoleHelper.writeMessage("Соединение установлено. Для выхода наберите команду 'exit'.");
+        } else {
+            ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
+        }
+
+        while (clientConnected) {
+            String text = ConsoleHelper.readString();
+            if (text.toLowerCase().equals("exit")) {
+                break;
+            }
+            if (shouldSendTextFromConsole())
+                sendTextMessage(text);
+        }
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
+    }
 
     protected Connection connection;
     private volatile boolean clientConnected = false;
 
-    public class SocketThread extends Thread {
-
+    protected String getServerAddress() {
+        ConsoleHelper.writeMessage("Введите адрес сервера: ");
+        return ConsoleHelper.readString();
     }
+
+    protected int getServerPort() {
+        ConsoleHelper.writeMessage("Введите порт сервера: ");
+        return ConsoleHelper.readInt();
+    }
+
+    protected String getUserName() {
+        ConsoleHelper.writeMessage("Введите имя пользователя: ");
+        return ConsoleHelper.readString();
+    }
+
+    protected boolean shouldSendTextFromConsole() {
+        return true;
+    }
+
+    protected SocketThread getSocketThread() {
+        return new SocketThread();
+    }
+
+    protected void sendTextMessage(String text) {
+        try {
+            connection.send(new Message(MessageType.TEXT, text));
+        } catch (IOException e) {
+            ConsoleHelper.writeMessage("Произошла ошибка во время отправки сообщения");
+            clientConnected = false;
+        }
+    }
+
+   
+
+    public class SocketThread extends Thread {
+        protected void processIncomingMessage(String message) {
+            ConsoleHelper.writeMessage(message);
+        }
+
+        protected void informAboutAddingNewUser(String userName) {
+            ConsoleHelper.writeMessage(String.format("Участник с именем %s присоединился к чату.", userName));
+        }
+
+        protected void informAboutDeletingNewUser(String userName) {
+            ConsoleHelper.writeMessage(String.format("Участник с именем %s покинул чат.", userName));
+        }
+
+        protected void notifyConnectionStatusChanged(boolean clientConnected) {
+            Client.this.clientConnected = clientConnected;
+            synchronized (Client.this) {
+                Client.this.notify();
+            }
+        }
+    }
+
 }
