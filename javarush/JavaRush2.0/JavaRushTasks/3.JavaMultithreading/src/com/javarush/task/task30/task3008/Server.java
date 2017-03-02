@@ -1,60 +1,29 @@
 package com.javarush.task.task30.task3008;
 
 /*
-Приступим к самому важному – написанию класса Server. Сервер должен поддерживать
-множество соединений с разными клиентами одновременно. Это можно реализовать с
-помощью следующего алгоритма:
+Этап второй, но не менее важный – отправка клиенту (новому участнику) информации об
+остальных клиентах (участниках) чата.
 
-- Сервер создает серверное сокетное соединение.
+Для этого:
+1) Добавь приватный метод void sendListOfUsers(Connection connection, String userName) throws IOException, где connection – соединение с участником,
+которому будем слать информацию, а userName – его имя. Метод должен:
+2) Пройтись по connectionMap.
+3) У каждого элемента из п.2 получить имя клиента, сформировать команду с типом USER_ADDED и полученным именем.
+4) Отправить сформированную команду через connection.
+5) Команду с типом USER_ADDED и именем равным userName отправлять не нужно, пользователь и так имеет информацию о себе.
 
-- В цикле ожидает, когда какой-то клиент подключится к сокету.
 
-- Создает новый поток обработчик Handler, в котором будет происходить обмен
-
-сообщениями с клиентом.
-
-- Ожидает следующее соединение.
-
-Добавь:
-
-1)	В класс Server приватный статический вложенный класс Handler, унаследованный от
-
-Thread.
-
-2)	В класс Handler поле socket типа Socket.
-
-3)	В класс Handler конструктор, принимающий в качестве параметра Socket и
-
-инициализирующий им соответствующее поле класса.
-
-4)	Метод main класса Server, должен:
-
-а) Запрашивать порт сервера, используя ConsoleHelper.
-
-б) Создавать серверный сокет java.net.ServerSocket, используя порт из предыдущего пункта.
-
-в) Выводить сообщение, что сервер запущен.
-
-г) В бесконечном цикле слушать и принимать входящие сокетные соединения только что созданного
-
-серверного сокета.
-
-д) Создавать и запускать новый поток Handler, передавая в конструктор сокет из предыдущего пункта.
-
-е) После создания потока обработчика Handler переходить на новый шаг цикла.
-
-ж) Предусмотреть закрытие серверного сокета в случае возникновения исключения.
-
-з) Если исключение Exception все же произошло, поймать его и вывести сообщение
-
-об ошибке.
  */
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
+
+    private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     private static class Handler extends Thread {
         private Socket socket;
@@ -62,6 +31,46 @@ public class Server {
         public Handler(Socket socket) {
             this.socket = socket;
         }
+
+        private void sendListOfUsers(Connection connection, String userName) throws IOException {
+            for (String clientName : connectionMap.keySet()) {
+                if (!clientName.equals(userName)) {
+                    connection.send(new Message(MessageType.USER_ADDED, clientName));
+                }
+            }
+        }
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
+
+            boolean accepted = false;
+            String name = null;
+
+            while (!accepted) {
+                connection.send(new Message(MessageType.NAME_REQUEST));
+                Message message = connection.receive();
+                if (message.getType() == MessageType.USER_NAME) {
+                    name = message.getData();
+                    if (!name.isEmpty() && !connectionMap.containsKey(name)) {
+                        connectionMap.put(name, connection);
+                        connection.send(new Message(MessageType.NAME_ACCEPTED));
+                        accepted = true;
+                    }
+                }
+            }
+            return name;
+        }
+
+    }
+
+    public static void sendBroadcastMessage(Message message) {
+        try {
+            for (Connection connection : connectionMap.values()) {
+                connection.send(message);
+            }
+        } catch (Exception e) {
+            ConsoleHelper.writeMessage("Во время отправки сообщения произошла ошибка");
+        }
+
     }
 
     public static void main(String[] args) {
@@ -73,7 +82,6 @@ public class Server {
             ConsoleHelper.writeMessage("Сервер запущен");
 
             while (true) {
-
                 Socket socket = serverSocket.accept();
                 Handler handler = new Handler(socket);
                 handler.start();
