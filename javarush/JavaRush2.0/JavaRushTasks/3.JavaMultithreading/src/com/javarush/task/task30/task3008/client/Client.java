@@ -20,8 +20,12 @@ import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class Client {
+
+    protected Connection connection;
+    private volatile boolean clientConnected = false;
 
     public void run() {
         SocketThread socketThread = getSocketThread();
@@ -58,8 +62,6 @@ public class Client {
         client.run();
     }
 
-    protected Connection connection;
-    private volatile boolean clientConnected = false;
 
     protected String getServerAddress() {
         ConsoleHelper.writeMessage("Введите адрес сервера: ");
@@ -93,9 +95,78 @@ public class Client {
         }
     }
 
-   
+    /*
+   Последний, но самый главный метод класса SocketThread – это метод void run(). Добавь его.
+   Его реализация с учетом уже созданных методов выглядит очень просто.
+
+Давай напишем ее:
+1) Запроси адрес и порт сервера с помощью методов getServerAddress() и getServerPort().
+2) Создай новый объект класса java.net.Socket, используя данные, полученные в предыдущем пункте.
+3) Создай объект класса Connection, используя сокет из п.17.2.
+4) Вызови метод, реализующий «рукопожатие» клиента с сервером (clientHandshake()).
+5) Вызови метод, реализующий основной цикл обработки сообщений сервера.
+6) При возникновении исключений IOException или ClassNotFoundException сообщи главному потоку о проблеме,
+используя notifyConnectionStatusChanged и false в качестве параметра.
+
+Клиент готов, можешь запустить сервер, несколько клиентов и проверить как все работает.
+
+
+     */
+
 
     public class SocketThread extends Thread {
+
+        @Override
+        public void run() {
+            try {
+
+                Socket socket = new Socket(getServerAddress(), getServerPort());
+                Client.this.connection = new Connection(socket);
+
+                clientHandshake();
+                clientMainLoop();
+
+
+            } catch (IOException e) {
+                notifyConnectionStatusChanged(false);
+            } catch (ClassNotFoundException e) {
+                notifyConnectionStatusChanged(false);
+            }
+
+        }
+
+        protected void clientHandshake() throws IOException, ClassNotFoundException {
+
+            while (true) {
+                Message message = connection.receive();
+                if (message.getType() == MessageType.NAME_REQUEST) {
+                    String clientName = getUserName();
+                    connection.send(new Message(MessageType.USER_NAME, clientName));
+                } else if (message.getType() == MessageType.NAME_ACCEPTED) {
+                    notifyConnectionStatusChanged(true);
+                    return;
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
+
+        protected void clientMainLoop() throws IOException, ClassNotFoundException {
+
+            while (!Thread.currentThread().isInterrupted()) {
+                Message message = connection.receive();
+                if (message.getType() == MessageType.TEXT) {
+                    processIncomingMessage(message.getData());
+                } else if (message.getType() == MessageType.USER_ADDED) {
+                    informAboutAddingNewUser(message.getData());
+                } else if (message.getType() == MessageType.USER_REMOVED) {
+                    informAboutDeletingNewUser(message.getData());
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
+
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
         }
