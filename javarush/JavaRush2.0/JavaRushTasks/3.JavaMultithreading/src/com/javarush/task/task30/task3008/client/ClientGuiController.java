@@ -17,7 +17,6 @@ public class ClientGuiController extends Client {
         controller.run();
     }
 
-
     @Override
     protected SocketThread getSocketThread() {
         return new GuiSocketThread();
@@ -29,12 +28,10 @@ public class ClientGuiController extends Client {
         getSocketThread().run();
     }
 
-    // Объяви метод ClientGuiModel getModel(), который должен возвращать модель.
     public ClientGuiModel getModel() {
         return model;
     }
 
-    //getters
     @Override
     protected String getServerAddress() {
         return view.getServerAddress();
