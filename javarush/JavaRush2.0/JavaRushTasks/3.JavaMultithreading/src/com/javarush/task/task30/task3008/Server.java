@@ -1,16 +1,25 @@
 package com.javarush.task.task30.task3008;
 
 /*
-Этап второй, но не менее важный – отправка клиенту (новому участнику) информации об
-остальных клиентах (участниках) чата.
+Пришло время написать главный метод класса Handler, который будет вызывать все
+вспомогательные методы, написанные ранее. Реализуем метод void run() в классе Handler.
 
-Для этого:
-1) Добавь приватный метод void sendListOfUsers(Connection connection, String userName) throws IOException, где connection – соединение с участником,
-которому будем слать информацию, а userName – его имя. Метод должен:
-2) Пройтись по connectionMap.
-3) У каждого элемента из п.2 получить имя клиента, сформировать команду с типом USER_ADDED и полученным именем.
-4) Отправить сформированную команду через connection.
-5) Команду с типом USER_ADDED и именем равным userName отправлять не нужно, пользователь и так имеет информацию о себе.
+Он должен:
+1. Выводить сообщение, что установлено новое соединение с удаленным адресом, который можно получить с помощью метода getRemoteSocketAddress.
+2. Создавать Connection, используя поле socket.
+3. Вызывать метод, реализующий рукопожатие с клиентом, сохраняя имя нового клиента.
+4. Рассылать всем участникам чата информацию об имени присоединившегося участника (сообщение с типом USER_ADDED).
+Подумай, какой метод подойдет для этого лучше всего.
+5. Сообщать новому участнику о существующих участниках.
+6. Запускать главный цикл обработки сообщений сервером.
+7. Обеспечить закрытие соединения при возникновении исключения.
+8. Отловить все исключения типа IOException и ClassNotFoundException, вывести в консоль информацию, что произошла ошибка при обмене данными с удаленным адресом.
+9. После того как все исключения обработаны, если п.11.3 отработал и возвратил нам имя,
+мы должны удалить запись для этого имени из connectionMap и разослать всем остальным участникам сообщение с типом USER_REMOVED и сохраненным именем.
+10. Последнее, что нужно сделать в методе run() – вывести сообщение, информирующее что соединение с удаленным адресом закрыто.
+
+Наш сервер полностью готов. Попробуй его запустить.
+
 
 
  */
@@ -26,10 +35,50 @@ public class Server {
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     private static class Handler extends Thread {
+
         private Socket socket;
 
         public Handler(Socket socket) {
             this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            ConsoleHelper.writeMessage("Установлено соединение с удаленным клиентом с адресом: " + socket.getRemoteSocketAddress());
+            Connection connection = null;
+            String clientName = null;
+
+            try {
+                connection = new Connection(socket);
+                clientName = serverHandshake(connection);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, clientName));
+                sendListOfUsers(connection, clientName);
+                serverMainLoop(connection, clientName);
+
+            } catch (IOException | ClassNotFoundException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка при обмене данными с удаленным адресом");
+            }
+
+            if (clientName != null) {
+                connectionMap.remove(clientName);
+                sendBroadcastMessage(new Message(MessageType.USER_REMOVED, clientName));
+            }
+
+            ConsoleHelper.writeMessage(String.format("Соединение с удаленным адресом (%s) закрыто.", socket.getRemoteSocketAddress()));
+
+
+        }
+
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
+            while (true) {
+                Message message = connection.receive();
+                if (message.getType() == MessageType.TEXT) {
+                    String textForMessage = userName + ": " + message.getData();
+                    sendBroadcastMessage(new Message(MessageType.TEXT, textForMessage));
+                } else {
+                    System.out.println("Во время загрузки сообщения произошла ошибка");
+                }
+            }
         }
 
         private void sendListOfUsers(Connection connection, String userName) throws IOException {
