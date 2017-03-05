@@ -1,16 +1,15 @@
 package com.javarush.task.task31.task3110;
 
 /*
-6. В методе main:
-6.1 Запроси пользователя ввести полный путь архива с клавиатуры. Не забудь, что имя тоже входит в состав полного пути.
-6.2 Создай объект класса ZipFileManager, передав в него имя файла архива. Разберись, как из String получить Path.
-
-Подсказка: изучи метод get() класса Paths.
-
-6.3 Запроси пользователя ввести путь к файлу, который будем архивировать. Не путай это с файлом архива, который мы уже ввели.
-На этот раз нам нужен файл, который мы будем сжимать, а не в котором хранить сжатые данные.
-6.4 Вызови метод createZip у объекта ZipFileManager, передав в него путь для архивации.
+5. Реализуй метод execute() в классе ExitCommand, он должен выводить “До встречи!” с помощью
+метода из класса ConsoleHelper
+6. В самом конце метода main в класса Archiver добавь код, который создает объект типа ExitCommand и вызывает у него метод execute()
+7. Попробуй, как это все работает
+Обрати внимание, что все файлы проекта должны быть в кодировке UTF-8. Кодировку в IntelliJ IDEA можно задать через пункты меню Settings -> Editor -> File Encodings.
+Проверь, что все три поля отвечающие за кодировку выставлены в UTF-8.
  */
+
+import com.javarush.task.task31.task3110.command.ExitCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,5 +25,8 @@ public class Archiver {
         ZipFileManager zipFileManager = new ZipFileManager(Paths.get(fileName));
         System.out.println("Введите полный путь до файла для архивации");
         zipFileManager.createZip(Paths.get(reader.readLine()));
+
+        ExitCommand exitCommand = new ExitCommand();
+        exitCommand.execute();
     }
 }
