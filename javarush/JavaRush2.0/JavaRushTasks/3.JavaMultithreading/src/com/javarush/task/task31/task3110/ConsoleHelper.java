@@ -6,19 +6,18 @@ import java.io.InputStreamReader;
 
 public class ConsoleHelper {
 
+    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public static void writeMessage(String message) {
         System.out.println(message);
     }
 
     public static String readString() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            return reader.readLine();
-        }
+        return reader.readLine();
     }
 
     public static int readInt() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            return Integer.parseInt(reader.readLine());
-        }
+        String text = readString();
+        return Integer.parseInt(text.trim());
     }
 }
