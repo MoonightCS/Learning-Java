@@ -9,20 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
-Реализуй метод инициализации панелей редактора initEditor(). Он должен:
-6.1. Устанавливать значение «text/html» в качестве типа контента для компонента htmlTextPane.
-Найди и используй подходящий метод.
-6.2. Создавать новый локальный компонент JScrollPane на базе htmlTextPane.
-6.3. Добавлять вкладку в панель tabbedPane с именем «HTML» и компонентом из предыдущего
-пункта.
-6.4. Создавать новый локальный компонент JScrollPane на базе plainTextPane.
-6.5. Добавлять еще одну вкладку в tabbedPane с именем «Текст» и компонентом из
-предыдущего пункта.
-6.6. Устанавливать предпочтительный размер панели tabbedPane.
-6.7. Создавать объект класса TabbedPaneChangeListener и устанавливать его в качестве слушателя изменений в tabbedPane.
-6.8. Добавлять по центру панели контента текущего фрейма нашу панель с вкладками.
-Получить панель контента текущего фрейма можно с помощью метода getContentPane(), его реализация унаследовалась от JFrame.
-После запуска приложения можно будет увидеть текущие результаты: две независимые закладки (HTML и Текст), в каждой из которых можно набирать свой текст.
+HTML Editor (9)
+9.1. Реализуй метод initMenuBar(). Он должен:
+9.1.1. Создавать новый объект типа JMenuBar. Это и будет наша панель меню.
+9.1.2. С помощью MenuHelper инициализировать меню в следующем порядке: Файл, Редактировать, Стиль, Выравнивание, Цвет, Шрифт и Помощь.
+9.1.3. Добавлять в верхнюю часть панели контента текущего фрейма нашу панель меню, аналогично тому, как это мы делали с панелью вкладок.
+9.2. Добавь конструктор класса View. Он должен устанавливать внешний вид и поведение (look and feel) нашего приложения такими же, как это определено в системе.
+Конструктор не должен кидать исключений, только логировать их с помощью ExceptionHandler.
+
+Подсказа: для реализации задания используй класс UIManager.
  */
 
 
@@ -32,6 +27,14 @@ public class View extends JFrame implements ActionListener {
     private JTabbedPane tabbedPane = new JTabbedPane(); // это будет панель с двумя вкладками.
     private JTextPane htmlTextPane = new JTextPane(); // это будет компонент для визуального редактирования html. Он будет размещен на первой вкладке.
     private JEditorPane plainTextPane = new JEditorPane(); // это будет компонент для редактирования html в виде текста, он будет отображать код html (теги и их содержимое).
+
+    public View() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException | ClassNotFoundException e) {
+            ExceptionHandler.log(e);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,12 +55,17 @@ public class View extends JFrame implements ActionListener {
     }
 
     public void initMenuBar() {
+        JMenuBar jMenuBar = new JMenuBar();
+        MenuHelper.initFileMenu(this, jMenuBar);
+        MenuHelper.initEditMenu(this, jMenuBar);
+        MenuHelper.initStyleMenu(this, jMenuBar);
+        MenuHelper.initAlignMenu(this, jMenuBar);
+        MenuHelper.initColorMenu(this, jMenuBar);
+        MenuHelper.initFontMenu(this, jMenuBar);
+        MenuHelper.initHelpMenu(this, jMenuBar);
 
+        getContentPane().add(jMenuBar, BorderLayout.NORTH);
     }
-    /*
-    В методе initEditor() для компонента tabbedPane должна добавляться вкладка с именем "HTML" и созданным компонентом JScrollPane на базе htmlTextPane.
-    В методе initEditor() для компонента tabbedPane должна добавляться вкладка с именем "Текст" и созданным компонентом JScrollPane на базе plainTextPane.
-     */
 
     public void initEditor() {
         //Устанавливать значение "text/html" в качестве типа контента для компонента htmlTextPane
@@ -75,10 +83,10 @@ public class View extends JFrame implements ActionListener {
         tabbedPane.setPreferredSize(new Dimension(800, 600));
 
         //Создавать объект класса TabbedPaneChangeListener и устанавливать его в качестве слушателя изменений в tabbedPane
-        tabbedPane.addChangeListener(new TabbedPaneChangeListener (this));
+        tabbedPane.addChangeListener(new TabbedPaneChangeListener(this));
 
         //Добавлять по центру панели контента текущего фрейма нашу панель с вкладками
-        getContentPane().add(tabbedPane,BorderLayout.CENTER);
+        getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
     }
 
