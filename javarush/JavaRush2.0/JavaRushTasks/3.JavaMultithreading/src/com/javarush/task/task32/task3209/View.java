@@ -13,12 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
-14.1. Добавь в класс представления метод selectHtmlTab(). Он должен:
-14.1.1. Выбирать html вкладку (переключаться на нее).
-14.1.2. Сбрасывать все правки с помощью метода, который ты реализовал ранее.
-14.2. Добавь в класс контроллера геттер для модели, в нашем случае это поле document.
-14.3. Добавь в представление метод update(), который должен получать документ у контроллера и устанавливать его в панель редактирования htmlTextPane.
-14.4. Добавь в представление метод showAbout(), который должен показывать диалоговое окно с информацией о программе. Информацию придумай сам, а вот тип сообщения должен быть JOptionPane.INFORMATION_MESSAGE.
+Реализуй метод selectedTabChanged() представления. Этот метод вызывается, когда произошла смена выбранной вкладки. Итак:
+18.1. Метод должен проверить, какая вкладка сейчас оказалась выбранной.
+18.2. Если выбрана вкладка с индексом 0 (html вкладка), значит нам нужно получить текст из plainTextPane и установить его в контроллер с помощью метода setPlainText.
+18.3. Если выбрана вкладка с индексом 1 (вкладка с html текстом), то необходимо получить текст у контроллера с помощью метода getPlainText() и установить его в панель plainTextPane.
+18.4. Сбросить правки (вызвать метод resetUndo представления).
  */
 
 
@@ -42,6 +41,19 @@ public class View extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    /*
+    Если индекс вкладки равен 0 - метод selectedTabChanged() должен получить текст из plainTextPane и установить его в контроллер с помощью метода setPlainText().
+     */
+    public void selectedTabChanged() {
+        if (tabbedPane.getSelectedIndex() == 0) {
+            controller.setPlainText(plainTextPane.getText());
+        }
+        else {
+            plainTextPane.setText(controller.getPlainText());
+        }
+        resetUndo();
     }
 
     public void showAbout() {
@@ -143,9 +155,6 @@ public class View extends JFrame implements ActionListener {
         this.controller = controller;
     }
 
-    public void selectedTabChanged() {
-
-    }
 
     public boolean canUndo() {
 

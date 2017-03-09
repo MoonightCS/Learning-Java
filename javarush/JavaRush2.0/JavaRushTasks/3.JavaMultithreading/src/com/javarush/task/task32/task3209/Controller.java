@@ -4,6 +4,8 @@ package com.javarush.task.task32.task3209;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
+import java.io.StringReader;
+import java.io.StringWriter;
 
 /*
 Добавь в контроллер метод resetDocument(), который будет сбрасывать текущий документ. Он должен:
@@ -32,8 +34,33 @@ public class Controller {
     }
 
     /*
-    Метод resetDocument() должен удалять у текущего документа document слушателя правок через метод removeUndoableEditListener().
+    Добавь метод String getPlainText() в контроллер. Он должен получать текст из документа со всеми html тегами.
+    17.1. Создай объект StringWriter.
+    17.2. Перепиши все содержимое из документа document в созданный объект с помощью
+    метода write класса HTMLEditorKit.
+    17.3. Как обычно, метод не должен кидать исключений.
      */
+
+    public String getPlainText() {
+        StringWriter stringWriter = new StringWriter();
+        try {
+            new HTMLEditorKit().write(stringWriter, document, 0, document.getLength());
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+
+        return stringWriter.toString();
+    }
+
+    public void setPlainText(String text) {
+        resetDocument();
+        StringReader stringReader = new StringReader(text);
+        try {
+            new HTMLEditorKit().read(stringReader, document, 0);
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+    }
 
     public void resetDocument() {
 
