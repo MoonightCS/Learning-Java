@@ -13,11 +13,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
-Реализуй метод selectedTabChanged() представления. Этот метод вызывается, когда произошла смена выбранной вкладки. Итак:
-18.1. Метод должен проверить, какая вкладка сейчас оказалась выбранной.
-18.2. Если выбрана вкладка с индексом 0 (html вкладка), значит нам нужно получить текст из plainTextPane и установить его в контроллер с помощью метода setPlainText.
-18.3. Если выбрана вкладка с индексом 1 (вкладка с html текстом), то необходимо получить текст у контроллера с помощью метода getPlainText() и установить его в панель plainTextPane.
-18.4. Сбросить правки (вызвать метод resetUndo представления).
+Реализуем метод actionPerformed(ActionEvent actionEvent) у представления, этот метод наследуется от интерфейса ActionListener и будет вызваться при выборе пунктов меню, у которых наше представление указано в виде слушателя событий.
+19.1. Получи из события команду с помощью метода getActionCommand(). Это будет обычная строка. По этой строке ты можешь понять какой пункт меню создал данное событие.
+19.2. Если это команда «Новый«, вызови у контроллера метод createNewDocument(). В этом пункте и далее, если необходимого метода в контроллере еще нет — создай заглушки.
+19.3. Если это команда «Открыть«, вызови метод openDocument().
+19.4. Если «Сохранить«, то вызови saveDocument().
+19.5. Если «Сохранить как…» — saveDocumentAs().
+19.6. Если «Выход» — exit().
+19.7. Если «О программе«, то вызови метод showAbout() у представления.
+Проверь, что заработали пункты меню Выход и О программе.
  */
 
 
@@ -40,7 +44,30 @@ public class View extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        String command = e.getActionCommand();
 
+        switch (command) {
+
+            case "Новый":
+                controller.createNewDocument();
+                break;
+            case "Открыть":
+                controller.openDocument();
+                break;
+            case "Сохранить":
+                controller.saveDocument();
+                break;
+            case "Сохранить как...":
+                controller.saveDocumentAs();
+                break;
+            case "Выход":
+                controller.exit();
+                break;
+            case "О программе":
+                showAbout();
+                break;
+        }
     }
 
     /*
@@ -49,8 +76,7 @@ public class View extends JFrame implements ActionListener {
     public void selectedTabChanged() {
         if (tabbedPane.getSelectedIndex() == 0) {
             controller.setPlainText(plainTextPane.getText());
-        }
-        else {
+        } else {
             plainTextPane.setText(controller.getPlainText());
         }
         resetUndo();
