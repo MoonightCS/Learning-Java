@@ -1,25 +1,11 @@
 package com.javarush.task.task27.task2712.ad;
 
-/*
-3. Определим необходимые данные для объекта AdvertisementManager — это время выполнения заказа поваром.
-Т.к. продолжительность видео у нас хранится в секундах, то и и время выполнения заказа тоже будем принимать в секундах.
-В классе AdvertisementManager создай конструктор, который принимает один параметр — int timeSeconds.
-Создай соответствующее поле и сохраните это значение в него.
-
-4. AdvertisementManager выполняет только одно единственное действие — обрабатывает рекламное видео.
-Поэтому создайте единственный публичный метод void processVideos(), его функционал опишем в следующем задании.
-А пока выведем в консоль «calling processVideos method»
-
-5. Чтобы тестировать данную функциональность, нужно добавить вызов processVideos метода у AdvertisementManager.
-Очевидно, что этот метод должен вызываться во время создания заказа, а точнее — в параллельном режиме.
-Заказ готовится в то время, как видео смотрится.
-Добавьте вызов метода processVideos() в нужное место.
-
-P.S. Не забудь что время приготовления заказа считается в минутах, а время показа рекламы в секундах!
- */
-
-
 import com.javarush.task.task27.task2712.ConsoleHelper;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class AdvertisementManager {
 
@@ -31,6 +17,98 @@ public class AdvertisementManager {
     }
 
     public void processVideos() {
-        ConsoleHelper.writeMessage("calling processVideos method()");
+
+        List<Advertisement> potentialAdvertisements = new ArrayList<>();
+        List<Advertisement> optimalVideoList = null;
+        for (Advertisement advertisement : storage.list()) {
+            if (advertisement.getDuration() <= this.timeSeconds && advertisement.getHits() > 0) {
+                potentialAdvertisements.add(advertisement);
+            }
+        }
+
+        if (!potentialAdvertisements.isEmpty()) {
+            optimalVideoList = new JewHelper(potentialAdvertisements).getBestAdvList();
+        } else throw new NoVideoAvailableException();
+
+        Collections.sort(optimalVideoList, new Comparator<Advertisement>() {
+            @Override
+            public int compare(Advertisement o1, Advertisement o2) {
+                return (int) (o1.getAmountPerOneDisplaying() == o2.getAmountPerOneDisplaying()
+                        ? (o1.getAmountPerSecond() - o2.getAmountPerSecond()) * 1000000
+                        : o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying());
+            }
+        });
+
+        for (int i = 0; i < optimalVideoList.size(); i++) {
+            Advertisement showingAd = optimalVideoList.get(i);
+            ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d",
+                    showingAd.getName(),
+                    showingAd.getAmountPerOneDisplaying(),
+                    (int) (showingAd.getAmountPerSecond() * 1000)
+            ));
+            showingAd.revalidate();
+
+        }
+    }
+
+    /*
+1. сумма денег, полученная от показов, должна быть максимальной из всех возможных вариантов
+2. общее время показа рекламных роликов НЕ должно превышать время приготовления блюд для текущего заказа;
+3. для одного заказа любой видео-ролик показывается не более одного раза;
+4. если существует несколько вариантов набора видео-роликов с одинаковой суммой денег, полученной от показов, то:
+4.1. выбрать тот вариант, у которого суммарное время максимальное;
+4.2. если суммарное время у этих вариантов одинаковое, то выбрать вариант с минимальным количеством роликов;
+5. количество показов у любого рекламного ролика из набора — положительное число.
+     */
+
+    private class JewHelper {
+
+        List<Advertisement> potentialAdvertisements;
+
+        private int bestAmountOfAllVideo = 0;
+        private int longestTimeOfVideo = 0;
+        private List<Advertisement> bestAdvList;
+
+        public JewHelper(List<Advertisement> potentialAdvertisements) {
+            this.potentialAdvertisements = potentialAdvertisements;
+            recursiveSearch(this.potentialAdvertisements);
+        }
+
+        private void recursiveSearch(List<Advertisement> advertisementList) {
+            int amountOfAd = 0;
+            int sumOfAdTime = 0;
+            for (Advertisement advertisement : advertisementList) {
+                amountOfAd += advertisement.getAmountPerOneDisplaying();
+                sumOfAdTime += advertisement.getDuration();
+            }
+
+            if (sumOfAdTime > timeSeconds) {
+                for (int i = 0; i < advertisementList.size(); i++) {
+                    List<Advertisement> tmpList = new ArrayList<>(advertisementList);
+                    tmpList.remove(i);
+                    recursiveSearch(tmpList);
+                }
+            } else {
+                if (amountOfAd > bestAmountOfAllVideo) {
+                    bestAdvList = advertisementList;
+                } else if (amountOfAd == bestAmountOfAllVideo) {
+                    if (sumOfAdTime > bestAmountOfAllVideo) {
+                        bestAdvList = advertisementList;
+                    } else if (sumOfAdTime == longestTimeOfVideo) {
+                        if (advertisementList.size() < bestAdvList.size()) {
+                            bestAdvList = advertisementList;
+                        }
+                    }
+                }
+                if (bestAdvList == advertisementList) {
+                    bestAmountOfAllVideo = amountOfAd;
+                    longestTimeOfVideo = sumOfAdTime;
+                }
+            }
+        }
+
+        public List<Advertisement> getBestAdvList() {
+            return bestAdvList;
+        }
     }
 }
