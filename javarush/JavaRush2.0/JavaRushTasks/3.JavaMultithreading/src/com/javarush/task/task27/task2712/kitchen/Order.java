@@ -32,13 +32,28 @@ public class Order {
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
+    public boolean isEmpty() {
+        return dishes.isEmpty();
+    }
+
+
     @Override
     public String toString() {
-        if (dishes.isEmpty()) {
+        if (isEmpty()) {
             return "";
         } else {
             return "Your order: " + dishes.toString() + " of " + tablet.toString();
         }
+    }
+
+    public int getTotalCookingTime() {
+
+        int totalTime = 0;
+        for (int i = 0; i < dishes.size(); i++) {
+            totalTime = dishes.get(i).getDuration() + totalTime;
+        }
+        return totalTime;
+
     }
 
 
