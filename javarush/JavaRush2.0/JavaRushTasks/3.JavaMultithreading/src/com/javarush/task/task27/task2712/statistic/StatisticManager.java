@@ -1,38 +1,21 @@
 package com.javarush.task.task27.task2712.statistic;
 
+import com.javarush.task.task27.task2712.kitchen.Cook;
 import com.javarush.task.task27.task2712.statistic.event.EventDataRow;
 import com.javarush.task.task27.task2712.statistic.event.EventType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
-1. Внутри StatisticStorage создай метод void put(EventDataRow data).
+5. В StatisticManager void register(Cook cook), который зарегистрирует полученного повара.
+Создай в классе StatisticManager множество (Set) поваров (cooks) и добавь в него повара.
 
-2. Чтобы методом put(EventDataRow data) добавить объект data в данные карты, нужен тип события — EventType.
-Будет правильно, если событие будет хранить в себе свой тип. Поэтому:
-2.1. В интерфейс EventDataRow добавь метод EventType getType()
-2.2. Реализуй этот метод в каждом классе-событии: CookedOrderEventDataRow, NoAvailableVideoEventDataRow, VideoSelectedEventDataRow
-
-3. Сделай так, чтобы к методу void put(EventDataRow data) нельзя было получить доступ за пределами класса StatisticManager.
-Воспользуйся особенностями вложенных классов.
-
-Теперь остается расставить вызовы StatisticManager в те места, которые генерируют события.
-
-4. Зарегистрируй событие для повара во время приготовления еды.
-Добавь геттер для поля dishes в класс Order, используйте его при создании события.
-
-5. Зарегистрируй событие «видео выбрано» перед отображением рекламы пользователю.
-
-6. Метод register с одним параметром типа EventDataRow должен регистрировать полученное событие в statisticStorage.
-
-
+6. Реализуй необходимые геттеры у классов CookedOrderEventDataRow, NoAvailableVideoEventDataRow и VideoSelectedEventDataRow.
  */
 
 public class StatisticManager {
 
+    private Set<Cook> cooks = new HashSet<>();
     private static StatisticManager instance = new StatisticManager();
     private StatisticStorage statisticStorage = new StatisticStorage();
 
@@ -45,6 +28,10 @@ public class StatisticManager {
 
     public void register(EventDataRow data) {
         statisticStorage.put(data);
+    }
+
+    public void register(Cook cook) {
+        cooks.add(cook);
     }
 
     private class StatisticStorage {
