@@ -31,6 +31,8 @@ Start cooking - Your order: [Soup] of Tablet{number=5}
  */
 
 import com.javarush.task.task27.task2712.ConsoleHelper;
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
+import com.javarush.task.task27.task2712.statistic.event.CookedOrderEventDataRow;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -53,6 +55,8 @@ public class Cook extends Observable implements Observer {
     @Override
     public void update(Observable observable, Object arg) {
         ConsoleHelper.writeMessage("Start cooking - " + arg + ", cooking time " + ((Order) arg).getTotalCookingTime() + "min");
+        StatisticManager.getInstance().register(new CookedOrderEventDataRow(((Order) arg).getTablet().toString(), name,
+                ((Order) arg).getTotalCookingTime() * 60, ((Order) arg).getDishes()));
         setChanged();
         notifyObservers(arg);
     }
