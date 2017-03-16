@@ -39,8 +39,9 @@ public class Advertisement {
     }
 
     public double getAmountPerSecond() {
-        return (double)amountPerOneDisplaying / duration;
+        return (double) amountPerOneDisplaying / duration;
     }
+
     public void revalidate() {
         if (hits <= 0) throw new UnsupportedOperationException();
         hits--;
