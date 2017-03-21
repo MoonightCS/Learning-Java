@@ -3,14 +3,17 @@ package com.javarush.task.task35.task3513;
 import java.util.*;
 
 /*
-Далее перейдем в класс Model и реализуем два метода:
-1) boolean hasBoardChanged — будет возвращать true, в случае, если вес плиток в массиве gameTiles отличается от веса плиток в верхнем массиве стека previousStates.
-Обрати внимание на то, что мы не должны удалять из стека верхний элемент, используй метод peek.
+Давай реализуем метод autoMove в классе Model, который будет выбирать лучший из возможных ходов и выполнять его.
 
-2) MoveEfficiency getMoveEfficiency(Move move) — принимает один параметр типа move, и возвращает объект типа MoveEfficiency описывающий эффективность переданного хода. Несколько советов:
-а) не забудь вызывать метод rollback, чтобы восстановить корректное игровое состояние;
-б) в случае, если ход не меняет состояние игрового поля, количество пустых плиток и счет у объекта MoveEfficiency сделай равными -1 и 0 соответственно;
-в) выполнить ход можно вызвав метод move на объекте полученном в качестве параметра.
+Сделаем так:
+1) Создадим локальную PriorityQueue с параметром Collections.reverseOrder() (для того, чтобы вверху очереди всегда был максимальный элемент) и размером равным четырем.
+2) Заполним PriorityQueue четырьмя объектами типа MoveEfficiency (по одному на каждый вариант хода).
+3) Возьмем верхний элемент и выполним ход связанный с ним.
+
+После реализации метода autoMove добавим его вызов в метод keyPressed класса Controller по нажатию на клавишу A (код — KeyEvent.VK_A).
+
+P.S. В качестве факультативного задания можешь почитать про указатели на методы и попробовать передать аргумент в метод getMoveEfficiency используя оператор «::«.
+Для метода left должно получиться getMoveEfficiency(this::left). Альтернативно можешь использовать внутренний анонимный класс.
  */
 
 public class Model {
@@ -38,6 +41,17 @@ public class Model {
         model.print();
         model.up();
         model.print();
+
+    }
+
+    public void autoMove() {
+        PriorityQueue<MoveEfficiency> priorityQueue = new PriorityQueue<>(4, Collections.reverseOrder());
+        priorityQueue.offer(getMoveEfficiency(this::left));
+        priorityQueue.offer(getMoveEfficiency(this::right));
+        priorityQueue.offer(getMoveEfficiency(this::up));
+        priorityQueue.offer(getMoveEfficiency(this::down));
+
+        priorityQueue.poll().getMove().move();
 
     }
 
