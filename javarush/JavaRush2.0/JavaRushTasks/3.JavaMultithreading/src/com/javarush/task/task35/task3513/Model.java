@@ -15,85 +15,176 @@ public class Model {
 
     public static void main(String[] args) {
         Model model = new Model();
-        Tile[] tiles = new Tile[]{
-                new Tile(2),
-                new Tile(4),
-                new Tile(8),
-                new Tile(16)};
-        System.out.println(model.compressTiles(tiles));
-        System.out.println(model.mergeTiles(tiles));
+        model.gameTiles = new Tile[FIELD_WIDTH][];
+        model.gameTiles[0] = new Tile[]{new Tile(2), new Tile(2), new Tile(2), new Tile(2)};
+        model.gameTiles[1] = new Tile[]{new Tile(2), new Tile(4), new Tile(4), new Tile(4)};
+        model.gameTiles[2] = new Tile[]{new Tile(4), new Tile(8), new Tile(8), new Tile(8)};
+        model.gameTiles[3] = new Tile[]{new Tile(4), new Tile(16), new Tile(16), new Tile(16)};
+
+        model.print();
+        model.up();
+        model.print();
+
+    }
+
+    public Tile[][] getGameTiles() {
+        return gameTiles;
+    }
+
+
+    private Tile[][] copy(Tile[][] arr) {
+        Tile[][] copyArr = new Tile[FIELD_WIDTH][FIELD_WIDTH];
+
         for (int i = 0; i < FIELD_WIDTH; i++) {
-            System.out.print(tiles[i].value + " ");
+            for (int j = 0; j < FIELD_WIDTH; j++) {
+                copyArr[i][j] = new Tile(arr[i][j].value);
+            }
+        }
+        return copyArr;
+    }
+
+
+    public boolean canMove() {
+        boolean canMove = false;
+
+        Tile[][] copy = copy(gameTiles);
+
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            for (int j = 0; j < FIELD_WIDTH; j++) {
+                if (compressTiles(copy[j]) | mergeTiles(copy[j])) {
+                   return true;
+                }
+            }
+            clockwiseRotate(copy);
+        }
+        return false;
+    }
+
+    private void print() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.printf("%3d ", this.gameTiles[i][j].value);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
+    private void copy(Tile[][] dest, Tile[][] source) {
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            for (int j = 0; j < FIELD_WIDTH; j++) {
+                dest[i][j] = new Tile(source[i][j].value);
+            }
         }
     }
 
-    protected void left() {
-        boolean isCompressed = false;
-        boolean isMerged = false;
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            isCompressed = compressTiles(gameTiles[i]) || isCompressed;
-            isMerged = mergeTiles(gameTiles[i]) || isMerged;
+    protected void up() {
+        counterClockwiseRotate(gameTiles);
+        left();
+        clockwiseRotate(gameTiles);
+
+    }
+
+    protected void down() {
+        clockwiseRotate(gameTiles);
+        left();
+        counterClockwiseRotate(gameTiles);
+    }
+
+    protected void right() {
+        counterClockwiseRotate(gameTiles);
+        counterClockwiseRotate(gameTiles);
+        left();
+        clockwiseRotate(gameTiles);
+        clockwiseRotate(gameTiles);
+    }
+
+
+    private static void counterClockwiseRotate(Tile[][] arr) {
+        int len = arr.length;
+        for (int i = 0; i < len / 2; i++) {
+            for (int j = i; j < len - 1 - i; j++) {
+                Tile tmp = arr[i][j];
+                arr[i][j] = arr[j][len - 1 - i];
+                arr[j][len - 1 - i] = arr[len - 1 - i][len - 1 - j];
+                arr[len - 1 - i][len - 1 - j] = arr[len - 1 - j][i];
+                arr[len - 1 - j][i] = tmp;
+            }
         }
-        if (isCompressed || isMerged) {
+    }
+
+    private static void clockwiseRotate(Tile[][] arr) {
+
+        int len = arr.length;
+        for (int i = 0; i < len / 2; i++) {
+            for (int j = len - 1 - i; j > i; j--) {
+                Tile tmp = arr[i][j];
+                arr[i][j] = arr[len - 1 - j][i];
+                arr[len - 1 - j][i] = arr[len - i - 1][len - 1 - j];
+                arr[len - 1 - i][len - 1 - j] = arr[j][len - 1 - i];
+                arr[j][len - 1 - i] = tmp;
+            }
+        }
+
+    }
+
+    protected boolean canMove(Tile[][] array) {
+        boolean isCompressed;
+        boolean isMerged;
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            isCompressed = compressTiles(array[i]);
+            isMerged = mergeTiles(array[i]);
+            if (isCompressed || isMerged) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+    protected void left() {
+        boolean isChanged = false;
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            if (compressTiles(gameTiles[i]) | mergeTiles(gameTiles[i])) {
+                isChanged = true;
+            }
+        }
+        if (isChanged) {
             addTile();
         }
     }
 
 
     private boolean mergeTiles(Tile[] tiles) {
-        boolean isArrayChanged;
-        Queue<Tile> queue = new ArrayDeque<>(FIELD_WIDTH);
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (tiles[i].value != 0 && (i < FIELD_WIDTH - 1) && tiles[i].value == tiles[i + 1].value) {
-                int value = tiles[i].value * 2;
-                maxTile = maxTile < value ? value : maxTile;
+        boolean isChanged = false;
+        for (int i = 1; i < tiles.length; i++) {
+            if ((tiles[i - 1].value == tiles[i].value) && !tiles[i - 1].isEmpty() && !tiles[i].isEmpty()) {
+                tiles[i - 1].value *= 2;
+                int value = tiles[i - 1].value;
                 score += value;
-                queue.offer(new Tile(value));
-                i++;
-            } else {
-                queue.offer(tiles[i]);
-            }
-        }
-        isArrayChanged = (queue.size() != 4 && queue.size() != 0);
-        if (!isArrayChanged) {
-            return false;
-        }
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (!queue.isEmpty()) {
-                tiles[i] = queue.poll();
-            } else {
+                maxTile = maxTile > value ? maxTile : value;
                 tiles[i] = new Tile();
+                compressTiles(tiles);
+                isChanged = true;
             }
         }
-        return true;
+        return isChanged;
     }
 
     private boolean compressTiles(Tile[] tiles) {
-        boolean isArrayChanged = false;
-        Tile[] testArray = new Tile[FIELD_WIDTH];
-
-        Queue<Tile> queue = new ArrayDeque<>(FIELD_WIDTH);
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (tiles[i].value != 0) {
-                queue.offer(tiles[i]);
-            } else {
-                testArray[i] = tiles[i];
+        boolean change = false;
+        for (int i = 1; i < tiles.length; i++) {
+            for (int j = 1; j < tiles.length; j++) {
+                if (tiles[j - 1].isEmpty() && !tiles[j].isEmpty()) {
+                    change = true;
+                    tiles[j - 1] = tiles[j];
+                    tiles[j] = new Tile();
+                }
             }
         }
-
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (!queue.isEmpty()) {
-                testArray[i] = queue.poll();
-            }
-        }
-
-        for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (tiles[i] != testArray[i]) {
-                tiles[i] = testArray[i];
-                isArrayChanged = true;
-            }
-        }
-        return isArrayChanged;
+        return change;
     }
 
     protected void resetGameTiles() {
@@ -109,12 +200,9 @@ public class Model {
 
     private void addTile() {
         List<Tile> emptyTiles = getEmptyTiles();
-        if (emptyTiles.size() == 0) {
-            return;
+        if (!emptyTiles.isEmpty()) {
+            emptyTiles.get((int) (Math.random() * emptyTiles.size())).value = (Math.random() < 0.9 ? 2 : 4);
         }
-        int randomIndex = (int) (emptyTiles.size() * Math.random());
-        Tile tile = emptyTiles.get(randomIndex);
-        tile.value = Math.random() < 0.9 ? 2 : 4;
     }
 
     private List<Tile> getEmptyTiles() {
