@@ -3,19 +3,15 @@ package com.javarush.task.task35.task3513;
 import java.util.*;
 
 /*
-Твой прогресс впечатляет! Для разнообразия, предлагаю дать игре возможность самостоятельно
-выбирать следующий ход.
+Далее перейдем в класс Model и реализуем два метода:
+1) boolean hasBoardChanged — будет возвращать true, в случае, если вес плиток в массиве gameTiles отличается от веса плиток в верхнем массиве стека previousStates.
+Обрати внимание на то, что мы не должны удалять из стека верхний элемент, используй метод peek.
 
-Начнем с простого, реализуем метод randomMove в классе Model, который будет вызывать один из методов движения случайным образом. Можешь реализовать это вычислив целочисленное n = ((int) (Math.random() * 100)) % 4.
-Это число будет содержать целое псевдослучайное число в диапазоне [0..3], по каждому из которых можешь вызывать один из методов left, right, up, down.
-
-Не забудь добавить в метод keyPressed класса Controller вызов метода randomMove по нажатию на клавишу R (код — KeyEvent.VK_R).
-
-P.S. Проверку корректности работы метода randomMove оставляю полностью под твою ответственность, проверю только наличие вызова метода Math.random().
-
-
+2) MoveEfficiency getMoveEfficiency(Move move) — принимает один параметр типа move, и возвращает объект типа MoveEfficiency описывающий эффективность переданного хода. Несколько советов:
+а) не забудь вызывать метод rollback, чтобы восстановить корректное игровое состояние;
+б) в случае, если ход не меняет состояние игрового поля, количество пустых плиток и счет у объекта MoveEfficiency сделай равными -1 и 0 соответственно;
+в) выполнить ход можно вызвав метод move на объекте полученном в качестве параметра.
  */
-
 
 public class Model {
 
@@ -45,8 +41,35 @@ public class Model {
 
     }
 
+    public MoveEfficiency getMoveEfficiency(Move move) {
+        MoveEfficiency moveEfficiency;
+        move.move();
+        if (hasBoardChanged()) {
+            moveEfficiency = new MoveEfficiency(getEmptyTiles().size(), score, move);
+        } else {
+            moveEfficiency = new MoveEfficiency(-1, 0, move);
+        }
+        rollback();
+        return moveEfficiency;
+    }
+
+    public boolean hasBoardChanged() {
+        int currentSum = 0;
+        int previousSum = 0;
+        if (!previousStates.isEmpty()) {
+            Tile[][] prevGameTiles = previousStates.peek();
+            for (int i = 0; i < FIELD_WIDTH; i++) {
+                for (int j = 0; j < FIELD_WIDTH; j++) {
+                    currentSum += gameTiles[i][j].value;
+                    previousSum += prevGameTiles[i][j].value;
+                }
+            }
+        }
+        return currentSum != previousSum;
+    }
+
     public void randomMove() {
-        int randomNumber = ((int)(Math.random() * 4));
+        int randomNumber = ((int) (Math.random() * 4));
         if (randomNumber == 0) {
             left();
         } else if (randomNumber == 1) {
