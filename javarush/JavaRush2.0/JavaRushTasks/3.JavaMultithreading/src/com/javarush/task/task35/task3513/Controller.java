@@ -29,6 +29,7 @@ resetGameTiles у модели.
 
 P.S. Для получения кода нажатой клавиши используй метод getKeyCode класса KeyEvent.
 
+Также добавим в метод keyPressed класса Controller вызов метода rollback по нажатию на клавишу Z (код — KeyEvent.VK_Z).
 
  */
 
@@ -76,6 +77,8 @@ public class Controller extends KeyAdapter {
             else if (KeyEvent.VK_RIGHT == e.getKeyCode()) model.right();
             else if (KeyEvent.VK_UP == e.getKeyCode()) model.up();
             else if (KeyEvent.VK_DOWN == e.getKeyCode()) model.down();
+            else if (KeyEvent.VK_Z == e.getKeyCode()) model.rollback();
+            else if (KeyEvent.VK_R == e.getKeyCode()) model.randomMove();
 
             if (WINNING_TILE == model.maxTile) {
                 view.isGameWon = true;

@@ -2,12 +2,30 @@ package com.javarush.task.task35.task3513;
 
 import java.util.*;
 
+/*
+Твой прогресс впечатляет! Для разнообразия, предлагаю дать игре возможность самостоятельно
+выбирать следующий ход.
+
+Начнем с простого, реализуем метод randomMove в классе Model, который будет вызывать один из методов движения случайным образом. Можешь реализовать это вычислив целочисленное n = ((int) (Math.random() * 100)) % 4.
+Это число будет содержать целое псевдослучайное число в диапазоне [0..3], по каждому из которых можешь вызывать один из методов left, right, up, down.
+
+Не забудь добавить в метод keyPressed класса Controller вызов метода randomMove по нажатию на клавишу R (код — KeyEvent.VK_R).
+
+P.S. Проверку корректности работы метода randomMove оставляю полностью под твою ответственность, проверю только наличие вызова метода Math.random().
+
+
+ */
+
+
 public class Model {
 
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles;
+    private Stack<Tile[][]> previousStates = new Stack<>();
+    private Stack<Integer> previousScores = new Stack<>();
     protected int score = 0;
     protected int maxTile = 2;
+    private boolean isSaveNeeded = true;
 
     public Model() {
         resetGameTiles();
@@ -25,6 +43,26 @@ public class Model {
         model.up();
         model.print();
 
+    }
+
+    public void randomMove() {
+        int randomNumber = ((int)(Math.random() * 4));
+        if (randomNumber == 0) {
+            left();
+        } else if (randomNumber == 1) {
+            right();
+        } else if (randomNumber == 2) {
+            up();
+        } else if (randomNumber == 3) {
+            down();
+        }
+    }
+
+    public void rollback() {
+        if (!previousStates.isEmpty() && !previousScores.isEmpty()) {
+            score = previousScores.pop();
+            gameTiles = previousStates.pop();
+        }
     }
 
     public Tile[][] getGameTiles() {
@@ -52,7 +90,7 @@ public class Model {
         for (int i = 0; i < FIELD_WIDTH; i++) {
             for (int j = 0; j < FIELD_WIDTH; j++) {
                 if (compressTiles(copy[j]) | mergeTiles(copy[j])) {
-                   return true;
+                    return true;
                 }
             }
             clockwiseRotate(copy);
@@ -80,6 +118,7 @@ public class Model {
     }
 
     protected void up() {
+        saveState(gameTiles);
         counterClockwiseRotate(gameTiles);
         left();
         clockwiseRotate(gameTiles);
@@ -87,17 +126,26 @@ public class Model {
     }
 
     protected void down() {
+        saveState(gameTiles);
         clockwiseRotate(gameTiles);
         left();
         counterClockwiseRotate(gameTiles);
     }
 
     protected void right() {
+        saveState(gameTiles);
         counterClockwiseRotate(gameTiles);
         counterClockwiseRotate(gameTiles);
         left();
         clockwiseRotate(gameTiles);
         clockwiseRotate(gameTiles);
+    }
+
+    private void saveState(Tile[][] tiles) {
+        Tile[][] copy = copy(tiles);
+        previousScores.push(score);
+        previousStates.push(copy);
+        isSaveNeeded = false;
     }
 
 
@@ -145,6 +193,9 @@ public class Model {
 
 
     protected void left() {
+        if (isSaveNeeded) {
+            saveState(gameTiles);
+        }
         boolean isChanged = false;
         for (int i = 0; i < FIELD_WIDTH; i++) {
             if (compressTiles(gameTiles[i]) | mergeTiles(gameTiles[i])) {
@@ -154,6 +205,7 @@ public class Model {
         if (isChanged) {
             addTile();
         }
+        isSaveNeeded = true;
     }
 
 
