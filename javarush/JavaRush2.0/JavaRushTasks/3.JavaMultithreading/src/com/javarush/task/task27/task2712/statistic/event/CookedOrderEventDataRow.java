@@ -14,11 +14,15 @@ public class CookedOrderEventDataRow implements EventDataRow {
     private Date currentDate;
 
     public CookedOrderEventDataRow(String tabletName, String cookName, int cookingTimeSeconds, List<Dish> cookingDishs) {
-        this.tabletName = tabletName.toString();
+        this.tabletName = tabletName;
         this.cookName = cookName;
         this.cookingTimeSeconds = cookingTimeSeconds;
         this.cookingDishs = cookingDishs;
         this.currentDate = new Date();
+    }
+
+    public String getCookName() {
+        return cookName;
     }
 
     @Override

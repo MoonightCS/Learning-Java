@@ -1,31 +1,50 @@
 package com.javarush.task.task27.task2712;
 
-/*
-2. В классе DirectorTablet создай четыре void метода:
-printAdvertisementProfit(), printCookWorkloading(), printActiveVideoSet(), printArchivedVideoSet()
-Они соответствуют перечисленным четырем пунктам.
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
 
-3. Чтобы можно было проверить результат, добавим в метод main создание директорского планшета и вывод статистики с помощью методов перечисленных выше.
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-Нам понадобятся еще некоторые методы.
-4. В EventDataRow создай методы:
-Date getDate(), реализация которого вернет дату создания записи int getTime(), реализация которого вернет время — продолжительность
-
-5. В StatisticManager void register(Cook cook), который зарегистрирует полученного повара.
-Создай в классе StatisticManager множество (Set) поваров (cooks) и добавь в него повара.
-
-6. Реализуй необходимые геттеры у классов CookedOrderEventDataRow, NoAvailableVideoEventDataRow и VideoSelectedEventDataRow.
- */
 
 public class DirectorTablet {
 
-    public void printAdvertisementProfit() {
-
+    public void printAdvertisementProfit(){
+        TreeMap<Date, Long> advertisementRevenueAgregatedByDay = StatisticManager.getInstance().getAdvertisementRevenueAgregatedByDay();
+        if (advertisementRevenueAgregatedByDay.isEmpty()) return;
+        NavigableSet<Date> datesRow = advertisementRevenueAgregatedByDay.descendingKeySet();
+        Long totalAmmout = Long.valueOf(0);
+        for (Date date : datesRow) {
+            Long dayAmount = advertisementRevenueAgregatedByDay.get(date);
+            totalAmmout += dayAmount;
+            ConsoleHelper.writeMessage(String.format(Locale.ENGLISH, "%s - %.2f",
+                    new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(date),
+                    0.01d * dayAmount)
+            );
+        }
+        ConsoleHelper.writeMessage(String.format(Locale.ENGLISH, "Total - %.2f", 0.01d * totalAmmout));
     }
-
     public void printCookWorkloading() {
-
+        TreeMap<Date, HashMap<String, Integer>> cookWorkloadingAgregatedByDay = StatisticManager.getInstance().getCookWorkloadingAgregatedByDay();
+        if (cookWorkloadingAgregatedByDay.isEmpty()) return;
+        NavigableSet<Date> datesRow = cookWorkloadingAgregatedByDay.descendingKeySet();
+        for (Date date: datesRow) {
+            ConsoleHelper.writeMessage(new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH).format(date));
+            List<Map.Entry<String, Integer>> cooksNameWorkDuration = new ArrayList(cookWorkloadingAgregatedByDay.get(date).entrySet());
+            Collections.sort(cooksNameWorkDuration, new Comparator<Map.Entry<String, Integer>>() {
+                @Override
+                public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
+                    return b.getValue() - a.getValue();
+                }
+            });
+            for (Map.Entry<String, Integer> cookNameWorkDuration: cooksNameWorkDuration) {
+                ConsoleHelper.writeMessage(String.format("%s - %d min",
+                        cookNameWorkDuration.getKey(),
+                        (int)Math.ceil(cookNameWorkDuration.getValue() / 60.0))
+                );
+            }
+        }
     }
+
 
     public void printActiveVideoSet() {
 

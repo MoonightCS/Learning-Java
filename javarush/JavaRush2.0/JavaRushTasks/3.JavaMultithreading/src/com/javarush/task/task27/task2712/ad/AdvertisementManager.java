@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AdvertisementManager {
 
@@ -22,7 +23,6 @@ public class AdvertisementManager {
 
         List<Advertisement> potentialAdvertisements = new ArrayList<>();
         List<Advertisement> optimalVideoList = null;
-        JewHelper jewHelper = null;
         for (Advertisement advertisement : storage.list()) {
             if (advertisement.getDuration() <= this.timeSeconds && advertisement.getHits() > 0) {
                 potentialAdvertisements.add(advertisement);
@@ -30,8 +30,7 @@ public class AdvertisementManager {
         }
 
         if (!potentialAdvertisements.isEmpty()) {
-            jewHelper = new JewHelper(potentialAdvertisements);
-            optimalVideoList = jewHelper.getBestAdvList();
+            optimalVideoList = new JewHelper(potentialAdvertisements).getBestAdvList();
         } else throw new NoVideoAvailableException();
 
         Collections.sort(optimalVideoList, new Comparator<Advertisement>() {
@@ -42,14 +41,6 @@ public class AdvertisementManager {
                         : o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying());
             }
         });
-
-        StatisticManager.getInstance().register(
-                new VideoSelectedEventDataRow(
-                        optimalVideoList,
-                        jewHelper.getBestAmountOfAllVideo(),
-                        jewHelper.getLongestTimeOfVideo()
-                )
-        );
 
         for (int i = 0; i < optimalVideoList.size(); i++) {
             Advertisement showingAd = optimalVideoList.get(i);
@@ -121,14 +112,6 @@ public class AdvertisementManager {
 
         public List<Advertisement> getBestAdvList() {
             return bestAdvList;
-        }
-
-        public int getBestAmountOfAllVideo() {
-            return bestAmountOfAllVideo;
-        }
-
-        public int getLongestTimeOfVideo() {
-            return longestTimeOfVideo;
         }
     }
 }

@@ -26,27 +26,22 @@ public class Tablet extends Observable {
         return number;
     }
 
-    public Order createOrder() {
+    public void createOrder() {
         Order order = null;
         try {
             order = new Order(this);
             ConsoleHelper.writeMessage(order.toString());
-
             if (!order.isEmpty()) {
                 AdvertisementManager advertisementManager = new AdvertisementManager(order.getTotalCookingTime() * 60);
-                advertisementManager.processVideos();
                 setChanged();
                 notifyObservers(order);
+                advertisementManager.processVideos();
             }
-            return order;
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Console is unavailable.");
-            return null;
         } catch (NoVideoAvailableException e) {
             logger.log(Level.INFO, "No video is available for the order " + order);
-            return null;
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Console is unavailable.");
         }
-
     }
 
     @Override

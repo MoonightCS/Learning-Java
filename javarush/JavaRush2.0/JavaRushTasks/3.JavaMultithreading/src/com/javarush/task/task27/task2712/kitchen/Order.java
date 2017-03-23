@@ -25,6 +25,7 @@ public class Order {
     private final int number;
     protected List<Dish> dishes;
     private final Tablet tablet;
+    private int cookingTime;
 
     public Order(Tablet tablet) throws IOException {
         number = tablet.getNumber();
@@ -46,19 +47,18 @@ public class Order {
         }
     }
 
-    public int getTotalCookingTime() {
-
-        int totalTime = 0;
-        for (int i = 0; i < dishes.size(); i++) {
-            totalTime = dishes.get(i).getDuration() + totalTime;
-        }
-        return totalTime;
-
-    }
-
     public Tablet getTablet() {
         return tablet;
     }
+
+    public int getTotalCookingTime() {
+        cookingTime = 0;
+        for (Dish dish : dishes) {
+            cookingTime += dish.getDuration();
+        }
+        return cookingTime;
+    }
+
 
     public List<Dish> getDishes() {
         return dishes;
