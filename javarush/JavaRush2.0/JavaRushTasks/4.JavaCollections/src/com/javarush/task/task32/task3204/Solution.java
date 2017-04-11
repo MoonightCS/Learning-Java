@@ -51,14 +51,14 @@ public class Solution {
     }
 
     private static void addRandomNumber(ByteArrayOutputStream stream) {
-        stream.write(48 + ((int)(Math.random() * 10)));
+        stream.write(48 + ((int) (Math.random() * 10)));
     }
 
     private static void addUpperCaseLetter(ByteArrayOutputStream stream) {
-        stream.write(97 + ((int)(Math.random() * 26)));
+        stream.write(97 + ((int) (Math.random() * 26)));
     }
 
     private static void addLowerCaseLetter(ByteArrayOutputStream stream) {
-        stream.write(65 + ((int)(Math.random() * 26)));
+        stream.write(65 + ((int) (Math.random() * 26)));
     }
 }

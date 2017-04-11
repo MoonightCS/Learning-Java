@@ -48,7 +48,7 @@ public class SearchFileVisitor extends SimpleFileVisitor<Path> {
             return FileVisitResult.CONTINUE;
         }
 
-        if (minSize > 0 && Files.size(file) < minSize ) {
+        if (minSize > 0 && Files.size(file) < minSize) {
             return FileVisitResult.CONTINUE;
         }
 

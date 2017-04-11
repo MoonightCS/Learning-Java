@@ -30,10 +30,10 @@ public class Solution {
         int bt;
         try {
             while ((bt = is.read()) != -1) {
-               stringWriter.write(bt);
+                stringWriter.write(bt);
             }
         } catch (Exception e) {
-             stringWriter.write("");
+            stringWriter.write("");
         }
 
         return stringWriter;
