@@ -17,6 +17,11 @@
         <constructor-arg ref="eventLogger"/>
     </bean>
 
+    <bean id="event" class="ru.popov.bodya.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
 </beans>
 
 

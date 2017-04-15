@@ -17,12 +17,14 @@ public class App {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("resources/spring.xml");
 //        App app = (App) ctx.getBean("app");
         App app = ctx.getBean(App.class);
-        app.logEvent("Some event for 1");
-        app.logEvent("Some event for 2");
+        app.logEvent("Some event for 1", ctx);
+        app.logEvent("Some event for 2", ctx);
     }
 
-    private void logEvent(String msg) {
+    private void logEvent(String msg, ApplicationContext ctx) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
+        Event event = ctx.getBean(Event.class);
+        event.setMsg(message);
+        eventLogger.logEvent(event);
     }
 }

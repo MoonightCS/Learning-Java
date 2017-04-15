@@ -1,5 +1,5 @@
 package ru.popov.bodya;
 
 public interface EventLogger {
-    public void logEvent(String msg);
+    public void logEvent(Event event);
 }
