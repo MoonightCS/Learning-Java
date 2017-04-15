@@ -1,11 +1,13 @@
 package ru.popov.bodya;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 public class Event {
     private int id;
     private String msg;
     private Date date;
+    private DateFormat df;
 
     public String getMsg() {
         return msg;
@@ -15,9 +17,10 @@ public class Event {
         this.msg = msg;
     }
 
-    public Event(Date date) {
+    public Event(Date date, DateFormat df) {
         id = (int) (Math.random() * 101);
         this.date = date;
+        this.df = df;
     }
 
     @Override
@@ -25,7 +28,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", msg='" + msg + '\'' +
-                ", date=" + date +
+                ", date=" + df.format(date) +
                 '}';
     }
 }

@@ -15,15 +15,16 @@ public class App {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("resources/spring.xml");
-//        App app = (App) ctx.getBean("app");
         App app = ctx.getBean(App.class);
-        app.logEvent("Some event for 1", ctx);
-        app.logEvent("Some event for 2", ctx);
+        Event event = ctx.getBean(Event.class);
+        Event event2 = ctx.getBean(Event.class);
+        app.logEvent("Some event for 1", event);
+        app.logEvent("Some event for 2", event2);
     }
 
-    private void logEvent(String msg, ApplicationContext ctx) {
+
+    private void logEvent(String msg, Event event) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
-        Event event = ctx.getBean(Event.class);
         event.setMsg(message);
         eventLogger.logEvent(event);
     }
