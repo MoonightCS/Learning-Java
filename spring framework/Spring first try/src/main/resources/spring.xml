@@ -10,11 +10,21 @@
         <constructor-arg value="John Smith"/>
     </bean>
 
+    <bean id="cacheLogger" class="ru.popov.bodya.CacheFileEventLogger" destroy-method="destroy">
+        <constructor-arg type="java.lang.String" value ="/Users/bogdanpopov/Desktop/learning-java/spring framework/Spring first try/resources/file.txt"/>
+        <constructor-arg type="int" value="4"/>
+    </bean>
+
     <bean id="eventLogger" class="ru.popov.bodya.ConsoleEventLogger"/>
+
+    <bean id="fileEventLogger" class="ru.popov.bodya.FileEventLogger"  init-method="init">
+        <constructor-arg value="/Users/bogdanpopov/Desktop/learning-java/spring framework/Spring first try/resources/file.txt" />
+    </bean>
+
 
     <bean id="app" class="ru.popov.bodya.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="fileEventLogger"/>
     </bean>
 
     <bean id="event" class="ru.popov.bodya.Event" scope="prototype">
@@ -25,6 +35,8 @@
             <bean class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
         </constructor-arg>
     </bean>
+
+
 
 
 </beans>
