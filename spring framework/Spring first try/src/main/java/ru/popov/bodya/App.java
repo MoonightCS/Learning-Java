@@ -16,7 +16,7 @@ public class App {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-        App app = ctx.getBean(App.class);
+        App app = (App) ctx.getBean("appWithCache");
 
         Event event = ctx.getBean(Event.class);
         app.logEvent("Some event for 1", event);

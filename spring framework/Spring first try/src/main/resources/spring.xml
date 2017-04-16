@@ -10,21 +10,28 @@
         <constructor-arg value="John Smith"/>
     </bean>
 
-    <bean id="cacheLogger" class="ru.popov.bodya.CacheFileEventLogger" destroy-method="destroy">
-        <constructor-arg type="java.lang.String" value ="/Users/bogdanpopov/Desktop/learning-java/spring framework/Spring first try/resources/file.txt"/>
-        <constructor-arg type="int" value="4"/>
-    </bean>
-
     <bean id="eventLogger" class="ru.popov.bodya.ConsoleEventLogger"/>
 
     <bean id="fileEventLogger" class="ru.popov.bodya.FileEventLogger"  init-method="init">
         <constructor-arg value="/Users/bogdanpopov/Desktop/learning-java/spring framework/Spring first try/resources/file.txt" />
     </bean>
 
+    <bean id="cacheLogger" class="ru.popov.bodya.CacheFileEventLogger" init-method="init" destroy-method="destroy">
+        <constructor-arg value ="/Users/bogdanpopov/Desktop/learning-java/spring framework/Spring first try/resources/file.txt"/>
+        <constructor-arg value="4"/>
+    </bean>
 
-    <bean id="app" class="ru.popov.bodya.App">
+
+
+
+    <bean id="appWithCache" class="ru.popov.bodya.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="fileEventLogger"/>
+        <constructor-arg ref="cacheLogger"/>
+    </bean>
+
+    <bean id="appWithFile" class="ru.popov.bodya.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="cacheLogger"/>
     </bean>
 
     <bean id="event" class="ru.popov.bodya.Event" scope="prototype">
