@@ -17,12 +17,16 @@ public class App {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("appWithCache");
+        App consoleApp = (App) ctx.getBean("appWithConsole");
 
         Event event = ctx.getBean(Event.class);
         app.logEvent("Some event for 1", event);
+        consoleApp.logEvent("Some event for 1", event);
 
         Event event2 = ctx.getBean(Event.class);
         app.logEvent("Some event for 2", event2);
+        consoleApp.logEvent("Some event for 2", event2);
+
         ctx.close();
     }
 
