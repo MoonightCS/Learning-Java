@@ -9,7 +9,7 @@ public class Executor {
 
     public static <T> T execQuery(Connection connection, String query, ResultHandler<T> handler) throws SQLException {
 
-        T value = null;
+        T value;
         try (Statement statement = connection.createStatement()) {
             statement.execute(query);
             ResultSet resultSet = statement.getResultSet();
