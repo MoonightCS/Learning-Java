@@ -6,7 +6,6 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import ru.popov.bodya.accounts.AccountService;
 import ru.popov.bodya.database.DBService;
-import ru.popov.bodya.database.datasets.UserProfile;
 import ru.popov.bodya.servlets.SignInServlet;
 import ru.popov.bodya.servlets.SignUpServlet;
 
