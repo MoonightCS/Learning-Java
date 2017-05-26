@@ -7,7 +7,7 @@ public class Client {
     public static final String UNIQUE_BINDING_NAME = "server.reverse";
 
     public static void main(String[] args) throws Exception {
-        //создание реестра расшареных объетов
+        //получение реестра расшареных объетов
         final Registry registry = LocateRegistry.getRegistry(9988);
 
         //получаем объект (на самом деле это proxy-объект)
