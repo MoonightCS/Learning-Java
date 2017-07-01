@@ -1,5 +1,6 @@
 package ru.popov.bodya;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,21 +15,24 @@ public class Terminal {
     public static void main(String[] args) {
         final Account accountA = new Account(300);
         final Account accountB = new Account(300);
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        checkingThreadPool(accountA, accountB);
+        checkingThreadPool(countDownLatch, accountA, accountB);
 //        checkingTransferWork(accountA, accountB);
 
     }
 
-    private static void checkingThreadPool(Account accountA, Account accountB) {
+    private static void checkingThreadPool(CountDownLatch countDownLatch, Account accountA, Account accountB) {
         int nThreads = Runtime.getRuntime().availableProcessors();
         System.out.println("available processors: " + nThreads);
         ExecutorService service = Executors.newFixedThreadPool(nThreads);
 
         for (int i = 0; i < 100000; i++) {
-            service.submit(new Transfer(accountA, accountB, 5));
-            service.submit(new Transfer(accountB, accountA, 5));
+            service.submit(new Transfer(countDownLatch, accountA, accountB, 5));
+            service.submit(new Transfer(countDownLatch, accountB, accountA, 5));
         }
+        System.out.println("countdown started");
+        countDownLatch.countDown();
         service.shutdown();
 
     }
