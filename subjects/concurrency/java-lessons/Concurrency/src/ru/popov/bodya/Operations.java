@@ -2,22 +2,8 @@ package ru.popov.bodya;
 
 import java.util.concurrent.locks.Lock;
 
-/**
- * Диагностируем дедлок - jps, затем jstack. UI tool - jconsole
- */
 
 public class Operations {
-
-    public static void main(String[] args) {
-        final Account accountA = new Account(300);
-        final Account accountB = new Account(300);
-
-        for (int i = 0; i < 10000; i++) {
-            new Thread(() -> transfer(accountA, accountB, 5)).start();
-            new Thread(() -> transfer(accountB, accountA, 5)).start();
-        }
-
-    }
 
     /**
      * Конечно, здесь есть вероятность, что hashcode у sender и receive одинаковые + и хэшкоды у их локов тоже одинаковые.
@@ -25,7 +11,7 @@ public class Operations {
      * проблему без хэширования, но решил рассмотреть случай без него
      */
 
-    private static void transfer(final Account sender, final Account receiver, int amount) {
+    public static void transfer(final Account sender, final Account receiver, int amount) {
 
         System.out.println("transfer started with sender" + sender + "on Thread" + Thread.currentThread().getName());
         int senderLockHash = sender.getLock().hashCode();
